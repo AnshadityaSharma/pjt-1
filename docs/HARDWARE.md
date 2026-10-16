@@ -23,9 +23,19 @@ disable the login shell in `raspi-config`) or a USB receiver (`/dev/ttyACM0`).
 ## GPIO on the Raspberry Pi 5
 
 The Pi 5 header is driven by the RP1 chip. `RPi.GPIO` does **not** work on the
-Pi 5. This project uses **lgpio** (`sudo apt install python3-lgpio`), the backend
-of gpiozero on Raspberry Pi OS Bookworm. `gpio.chip: auto` selects the RP1 chip
+Pi 5. This project uses **gpiozero with an explicit LGPIOFactory** for output
+and PWM, and direct **lgpio** for digital inputs and ultrasonic edge timestamps.
+Install with `sudo apt install python3-gpiozero python3-lgpio` and create the
+virtualenv with `--system-site-packages`, or use `pip install -e ".[pi]"` from
+`backend/` (`requirements-pi.txt` is the pip requirements alternative).
+GPIO libraries are imported lazily and are not required on simulation laptops.
+The factory is passed explicitly, so `GPIOZERO_PIN_FACTORY` cannot select legacy
+RPi.GPIO or mock pins in hardware mode. `gpio.chip: auto` enumerates the actual
+`/dev/gpiochip*` devices and requires an RP1 controller
 (`gpiochip0` on current kernels, `gpiochip4` on early Bookworm kernels).
+For a custom installation, `gpio.chip: <number>` selects a controller explicitly;
+verify that it is the header controller. The service user needs read/write
+permission for its device (normally membership of the `gpio` group).
 
 PWM uses lgpio's software-timed PWM at 1 kHz on ENA/ENB, which is adequate for
 an L298N. `motors.min_duty` maps any non-zero command above the motors' stall

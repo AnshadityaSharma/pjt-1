@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "rover-backend"
 version = "1.0.0"
 description = "Control, safety, planning and telemetry backend for the autonomous survey rover"
-readme = "../README.md"
+readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115,<1",
@@ -22,10 +22,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# lgpio is normally installed from apt on Raspberry Pi OS (python3-lgpio);
-# create the venv with --system-site-packages so it is visible.
-pi = ["lgpio>=0.2.2.0"]
+# GPIO libraries are optional on laptops. Raspberry Pi OS can provide them via
+# apt (python3-gpiozero/python3-lgpio) with a --system-site-packages venv.
+pi = ["gpiozero>=2.0,<3", "lgpio>=0.2.2.0; sys_platform == 'linux'"]
 vision = ["onnxruntime>=1.18"]
+camera-v4l2 = ["opencv-python-headless>=4.8"]
 vision-ultralytics = ["ultralytics>=8.2"]
 dev = ["pytest>=8", "pytest-asyncio>=0.23", "onnx>=1.15", "onnxruntime>=1.18"]
 

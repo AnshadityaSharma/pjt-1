@@ -1,0 +1,7 @@
+# Raspberry Pi OS: prefer apt install python3-gpiozero python3-lgpio and a
+# --system-site-packages virtualenv. This file is the pip installation alternative.
+-r requirements.txt
+gpiozero>=2.0,<3
+lgpio>=0.2.2.0; sys_platform == "linux"
+# CSI camera: sudo apt install python3-picamera2 (requires system libcamera).
+# V4L2 alternative: sudo apt install python3-opencv, or install .[camera-v4l2].

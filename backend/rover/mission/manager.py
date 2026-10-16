@@ -119,6 +119,8 @@ class MissionManager:
             raise MissionError("invalid_state", f"operation not allowed in state {self.sm.state.value}")
 
     def _execution_mode(self, plan: CoveragePlan) -> ExecMode:
+        if plan.kind == "grid" and plan.anchor_gps is not None:
+            return "open_loop"
         provider = self.localization.provider
         if plan.kind == "gps":
             return "gnss"
@@ -217,6 +219,8 @@ class MissionManager:
 
     def _start_checks(self, a: ActiveMission) -> list[str]:
         problems = []
+        if a.plan.anchor_gps and not self.cfg.calibration.calibrated:
+            problems.append("Anchored survey requires measured calibration; save Quick Calibration and re-plan before starting")
         if not self.supervisor.armed:
             problems.append("rover is disarmed: arm it first")
         ok, why = self.supervisor.motion_permitted()
@@ -503,6 +507,7 @@ class MissionManager:
             "invalidated": a.invalidated,
             "message": a.message,
             "progress": progress,
+            "projected_position": self.projected_position(),
             "plan_hash": a.plan.plan_hash,
             "summary": a.plan.summary.model_dump(mode="json"),
             "localization_note": a.plan.localization_note,
@@ -510,3 +515,15 @@ class MissionManager:
         if include_trace and a.executor:
             out["mission"]["trace"] = a.executor.progress.trace
         return out
+
+    def projected_position(self) -> dict[str, Any] | None:
+        a = self.active
+        if a is None or a.executor is None or a.plan.kind != "grid":
+            return None
+        from rover.planning.geo import project_grid
+
+        pose = a.executor.est
+        anchor = a.plan.anchor_gps
+        lat, lon = project_grid(anchor, pose.x, pose.y) if anchor else (None, None)
+        return {"frame": "grid_local", "x": pose.x, "y": pose.y, "lat": lat, "lon": lon,
+                "accuracy_m": None, "provider": "commanded_dead_reckoning", "measured": False}

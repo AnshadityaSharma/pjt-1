@@ -10,6 +10,8 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
+import uuid
+from pathlib import Path
 from typing import Any
 
 from rover.camera import CameraProvider
@@ -35,6 +37,8 @@ class VisionService:
         self.frames_processed = 0
         self._last_event: dict[str, float] = {}
         self._task: asyncio.Task[None] | None = None
+        self.on_detection: Any = None
+        self.magnetometer_context: Any = None
 
     def _build(self) -> FrameDetector:
         c = self.cfg
@@ -80,10 +84,10 @@ class VisionService:
             self.latest = result
             self.frames_processed += 1
             self.error = None
-            self._maybe_events(result)
+            self._maybe_events(result, frame.jpeg)
             await asyncio.sleep(max(0.0, period - (time.monotonic() - t0)))
 
-    def _maybe_events(self, result: DetectionResult) -> None:
+    def _maybe_events(self, result: DetectionResult, jpeg: bytes | None = None) -> None:
         if self.recorder is None or not self.cfg.event_classes:
             return
         now = time.monotonic()
@@ -93,15 +97,38 @@ class VisionService:
             if now - self._last_event.get(det.label, -1e9) < self.cfg.event_min_interval_s:
                 continue
             self._last_event[det.label] = now
-            self.recorder.record(
+            extra: dict[str, Any] = {
+                "frame_seq": result.frame_seq,
+                "magnetometer_context": self.magnetometer_context() if self.magnetometer_context else "not_installed",
+            }
+            if self.cfg.on_detection_action == "pause_and_alert":
+                extra["action"] = "pause_and_alert"
+                if self.on_detection:
+                    self.on_detection(det.label)
+                if jpeg:
+                    try:
+                        directory = Path(self.cfg.snapshot_dir)
+                        directory.mkdir(parents=True, exist_ok=True)
+                        filename = f"{uuid.uuid4().hex}.jpg"
+                        (directory / filename).write_bytes(jpeg)
+                        extra["snapshot_file"] = filename
+                    except OSError as exc:
+                        extra["snapshot_error"] = str(exc)
+                else:
+                    extra["snapshot_error"] = "triggering frame unavailable"
+            row = self.recorder.record(
                 ProcessedDetection(
                     sensor_id="camera", source_kind="camera", reading=None, confidence=round(det.confidence, 3),
                     label=det.label, uncertainty={"model": result.model, "validated": self.cfg.weights_validated_for_task},
                     raw={"box": list(det.box)},
                 ),
                 simulated=self.camera.simulated,
-                extra={"frame_seq": result.frame_seq},
+                extra=extra,
             )
+            if row and self.cfg.on_detection_action == "pause_and_alert":
+                self.events.emit(Severity.WARNING, "vision", "vision.detection_alert",
+                                 f"Unverified {det.label} candidate — motion paused; operator review required",
+                                 detection=row)
 
     def status(self) -> dict[str, Any]:
         r = self.latest

@@ -102,6 +102,9 @@ class RoverRuntime:
             self.detections.add_processor(ch.id, ThresholdProcessor(c.threshold, c.release_threshold, c.saturation, c.min_event_interval_s))
         self.sensors.add_listener(self.detections.on_reading)
         self.vision = VisionService(config.vision, self.camera, self.detections, self.events)
+        self.detections.position_context = self.missions.projected_position
+        self.vision.on_detection = self._pause_for_detection
+        self.vision.magnetometer_context = self._magnetometer_context
 
         self._tasks: list[asyncio.Task[Any]] = []
         self._telemetry_seq = 0
@@ -142,12 +145,34 @@ class RoverRuntime:
         except Exception:  # pragma: no cover
             pass
 
+    def _pause_for_detection(self, label: str) -> None:
+        reason = f"camera candidate: {label}"
+        # Immediate stop also covers manual driving; disarm requires explicit
+        # operator action before commands can be accepted again.
+        self.controller.emergency_halt(reason)
+        if self.missions.state == MissionState.RUNNING:
+            self.missions.pause(reason, by="vision")
+        self.supervisor.disarm(by="vision", reason=reason)
+
+    def _magnetometer_context(self) -> Any:
+        channels = self.sensors.of_type("magnetometer")
+        if not channels:
+            return "not_installed"
+        readings = [ch.last_reading.to_dict() for ch in channels
+                    if ch.last_reading and ch.reading_health().value == "ok"]
+        return {"status": "ready", "readings": readings} if readings else {"status": "unavailable"}
+
     # ------------------------------------------------------------------ lifecycle
 
     async def start(self) -> None:
         loop = asyncio.get_running_loop()
         self.events.bind_loop(loop)
         version = self.db.migrate()
+        self.detections.recent = self.repo.list_detections(limit=20)
+        calibration = self.repo.get_meta("quick_calibration")
+        if calibration:
+            from rover.config import CalibrationConfig
+            self.config.calibration = CalibrationConfig.model_validate(calibration)
         self.events.persist = self.repo.persist_event
         self.faults.persist_raise = lambda f: self.repo.persist_fault_raised(f, self.missions.current_mission_id())
         self.faults.persist_clear = self.repo.persist_fault_cleared
@@ -303,6 +328,7 @@ class RoverRuntime:
             "faults": [f.to_dict() for f in self.faults.active()],
             "camera": self.camera.status(),
             "vision": {**self.vision.status(), "latest": self.vision.latest_dict()},
+            "detections": self.detections.recent,
             "capabilities": self.capabilities(),
             "simulation": self.sim_snapshot(),
         }

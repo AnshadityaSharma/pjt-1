@@ -57,6 +57,7 @@ class HcSr04(_GpioSensor):
     def initialize(self) -> None:
         c = self.config
         chip = self._chip()
+        self.chip = chip
         try:
             chip.claim_output(c.trigger_pin, 0)
             chip.claim_alert(c.echo_pin, "down")

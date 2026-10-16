@@ -232,7 +232,101 @@ class SimulatedCamera(CameraProvider):
             await asyncio.sleep(1.0 / self.fps)
 
 
+class LocalCamera(CameraProvider):
+    """Optional CSI/libcamera or V4L2 capture; hardware imports remain lazy."""
+
+    def __init__(self, cfg: CameraConfig) -> None:
+        super().__init__()
+        self.cfg = cfg
+        self.provider = cfg.provider
+        self._device: Any = None
+        self._task: asyncio.Task[None] | None = None
+        self._stopping = False
+        self._stop_event = asyncio.Event()
+
+    def _open(self) -> None:
+        c = self.cfg
+        if self.provider == "picamera2":
+            from picamera2 import Picamera2
+            device = Picamera2(camera_num=c.device_index)
+            self._device = device
+            device.configure(device.create_video_configuration(main={"size": (c.width, c.height), "format": "RGB888"}))
+            device.start()
+        else:
+            import cv2
+            self._device = cv2.VideoCapture(c.device_index, cv2.CAP_V4L2)
+            if not self._device.isOpened():
+                raise RuntimeError(f"V4L2 camera {c.device_index} could not be opened")
+            self._device.set(cv2.CAP_PROP_FRAME_WIDTH, c.width)
+            self._device.set(cv2.CAP_PROP_FRAME_HEIGHT, c.height)
+
+    def _capture(self) -> bytes:
+        if self.provider == "picamera2":
+            out = io.BytesIO()
+            job = self._device.capture_image("main", wait=False)
+            self._device.wait(job, timeout=self.cfg.read_timeout_s).save(out, format="JPEG", quality=85)
+            return out.getvalue()
+        import cv2
+        ok, frame = self._device.read()
+        if not ok:
+            raise RuntimeError("V4L2 camera returned no frame")
+        ok, jpeg = cv2.imencode(".jpg", frame)
+        if not ok:
+            raise RuntimeError("V4L2 JPEG encoding failed")
+        return jpeg.tobytes()
+
+    def _close(self) -> None:
+        if self._device is not None:
+            try:
+                if self.provider == "picamera2":
+                    try:
+                        self._device.stop()
+                    finally:
+                        self._device.close()
+                else:
+                    self._device.release()
+            finally:
+                self._device = None
+
+    async def start(self) -> None:
+        self._stopping = False
+        self._stop_event.clear()
+        self._task = asyncio.create_task(self._run_local(), name=f"camera-{self.provider}")
+
+    async def stop(self) -> None:
+        self._stopping = True
+        self._stop_event.set()
+        if self._task:
+            # Let an in-flight native capture finish before releasing its device.
+            await self._task
+            self._task = None
+
+    async def _run_local(self) -> None:
+        backoff = 0.5
+        while not self._stopping:
+            try:
+                await asyncio.to_thread(self._open)
+                backoff = 0.5
+                while not self._stopping:
+                    await self._publish(await asyncio.to_thread(self._capture))
+                    self.error = None
+                    await asyncio.sleep(1.0 / self.cfg.proxy_fps)
+            except Exception as exc:
+                self.error = f"{self.provider}: {exc}"
+                log.warning("local camera unavailable: %s", self.error)
+            finally:
+                await asyncio.to_thread(self._close)
+            if not self._stopping:
+                try:
+                    await asyncio.wait_for(self._stop_event.wait(), timeout=min(backoff, self.cfg.max_backoff_s))
+                except TimeoutError:
+                    pass
+                backoff = min(backoff * 2, self.cfg.max_backoff_s)
+
+
 def build_camera(cfg: CameraConfig, world: Any | None) -> CameraProvider:
+    if cfg.provider in ("picamera2", "opencv_v4l2"):
+        return LocalCamera(cfg)
     if cfg.provider == "esp32cam":
         return Esp32MjpegCamera(cfg)
     if cfg.provider == "simulated":

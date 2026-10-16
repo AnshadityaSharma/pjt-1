@@ -103,14 +103,22 @@ sensors:
     thermal_zone: 0
 
 camera:
-  provider: esp32cam
+  provider: picamera2       # CSI camera via libcamera; opencv_v4l2 for /dev/video0
+  device_index: 0
+  width: 640
+  height: 480
   stream_url: http://192.168.1.60:81/stream
   snapshot_url: http://192.168.1.60/capture
 
 vision:
-  enabled: false
+  enabled: true             # unavailable until custom trained weights are installed
   backend: onnx
-  model_path: models/yolov8n.onnx
+  model_path: models/landmine_yolov8n.onnx
+  class_names: [landmine, ap_mine, at_mine]
   imgsz: 320
   max_rate_hz: 2
-  event_classes: []        # COCO classes are not survey targets; leave empty unless validated
+  event_classes: [landmine, ap_mine, at_mine]
+  on_detection_action: pause_and_alert
+  snapshot_dir: data/detection_snapshots
+  weights_validated_for_task: false
+  model_description: Custom landmine YOLOv8n; unverified surface-object candidates

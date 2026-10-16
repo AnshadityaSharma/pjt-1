@@ -108,7 +108,7 @@ export function useManualControl(clientId: string) {
     [sendCommand],
   );
 
-  /** Change the held command without an immediate send (joystick drags); the heartbeat carries it. */
+  /** Send changes immediately; heartbeat renews the command lease while held. */
   const update = useCallback(
     (cmd: ControlCommand) => {
       if (hbRef.current === undefined) {
@@ -117,8 +117,9 @@ export function useManualControl(clientId: string) {
       }
       cmdRef.current = cmd;
       setActive(cmd);
+      sendCommand();
     },
-    [hold],
+    [hold, sendCommand],
   );
 
   const release = useCallback(() => {

@@ -113,12 +113,18 @@ class L298NMotorDriver(MotorDriver):
     def initialize(self) -> None:
         try:
             chip = self.gpio.get()
+            self._chip = chip
             for side in (self.cfg.left, self.cfg.right):
                 chip.claim_output(side.in_a, 0)
                 chip.claim_output(side.in_b, 0)
-                chip.claim_output(side.enable, 0)
-                chip.pwm(side.enable, self.cfg.pwm_frequency_hz, 0.0)
+                chip.claim_pwm(side.enable, self.cfg.pwm_frequency_hz)
         except Exception as exc:
+            # Release every successfully claimed line after partial setup.
+            if self._chip is not None:
+                for side in (self.cfg.left, self.cfg.right):
+                    for pin in (side.enable, side.in_a, side.in_b):
+                        self._chip.free(pin)
+                self._chip = None
             self.error = str(exc)
             raise HardwareInitError(f"L298N initialisation failed: {exc}") from exc
         self._chip = chip

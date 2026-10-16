@@ -47,9 +47,9 @@ export function joystickVector(dx: number, dy: number, radius: number, deadZone 
 export const DIRECTION_LABEL: Record<Direction, string> = {
   stop: "Stop",
   forward: "Forward",
-  reverse: "Reverse",
-  left: "Pivot left",
-  right: "Pivot right",
+  reverse: "Backward",
+  left: "Left",
+  right: "Right",
   forward_left: "Forward-left",
   forward_right: "Forward-right",
   reverse_left: "Reverse-left",

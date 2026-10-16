@@ -106,6 +106,7 @@ class DetectionRecorder:
         self.mission_id = mission_id  # callable -> str | None
         self.processors: dict[str, DetectionProcessor] = {}
         self.recent: list[dict[str, Any]] = []
+        self.position_context: Any = None
 
     def add_processor(self, sensor_id: str, processor: DetectionProcessor) -> None:
         self.processors[sensor_id] = processor
@@ -121,6 +122,10 @@ class DetectionRecorder:
     def record(self, det: ProcessedDetection, simulated: bool, extra: dict[str, Any] | None = None) -> dict[str, Any] | None:
         est = self.localization.estimate()
         quality, pos = localization_quality(est)
+        commanded = self.position_context() if self.position_context else None
+        if commanded is not None and (pos is None or commanded.get("lat") is not None):
+            pos = commanded
+            quality = "commanded_dead_reckoning"
         mission_id = self.mission_id()
         try:
             row = self.repo.add_detection(

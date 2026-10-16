@@ -187,6 +187,14 @@ class OnnxYoloDetector(FrameDetector):
         if not self.class_names:
             meta = self.session.get_modelmeta().custom_metadata_map
             self.class_names = parse_names(meta) or []
+        else:
+            exported_names = parse_names(self.session.get_modelmeta().custom_metadata_map)
+            if exported_names and exported_names != self.class_names:
+                raise DetectorError("Configured classes do not match exported model metadata; use trained weights for these classes.")
+            out_shape = self.session.get_outputs()[0].shape
+            if len(out_shape) == 3 and isinstance(out_shape[1], int) and isinstance(out_shape[2], int):
+                if 4 + len(self.class_names) not in out_shape[1:]:
+                    raise DetectorError("YOLO output class count does not match configured classes")
 
     def detect(self, jpeg: bytes) -> DetectionResult:
         from PIL import Image

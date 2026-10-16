@@ -274,6 +274,11 @@ class Repository:
                 q = q.where(DetectionEvent.review_status == review_status)
             return [self._det(r) for r in s.scalars(q.order_by(DetectionEvent.id.desc()).limit(limit)).all()]
 
+    def get_detection(self, det_id: int) -> dict[str, Any] | None:
+        with self.db.session() as s:
+            row = s.get(DetectionEvent, det_id)
+            return self._det(row) if row is not None else None
+
     def review_detection(self, det_id: int, status: str, note: str | None) -> dict[str, Any] | None:
         with self.db.write_lock, self.db.session() as s, s.begin():
             r = s.get(DetectionEvent, det_id)

@@ -45,6 +45,12 @@ class GeoPoint(_Strict):
     lon: float = Field(..., ge=-180, le=180)
 
 
+class GpsAnchor(GeoPoint):
+    lat: float = Field(..., gt=-89.9, lt=89.9)
+    # Geographic bearing of grid +y, not a rover GPS fix.
+    heading_deg: float = Field(0.0, ge=0, lt=360)
+
+
 class Pose2D(BaseModel):
     x: float
     y: float
@@ -121,6 +127,7 @@ class CoveragePlan(BaseModel):
     kind: Literal["grid", "gps"]
     frame: Literal["grid_local", "enu"]
     origin: GeoPoint | None = None
+    anchor_gps: GpsAnchor | None = None
     boundary: list[Point]
     boundary_geo: list[GeoPoint] | None = None
     inner_boundary: list[list[Point]]
@@ -138,6 +145,7 @@ class CoveragePlan(BaseModel):
 
 
 class GridPlanRequest(_Strict):
+    anchor_gps: GpsAnchor | None = None
     units: Units = Units.M
     length: float = Field(..., gt=0, description="Extent along +y (forward from the near edge)")
     width: float = Field(..., gt=0, description="Extent along +x (to the right)")

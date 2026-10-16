@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Field, Notice, Panel } from "../components/ui";
 import { authToken, backendUrl, setConnection } from "../lib/api";
 import { useTelemetry } from "../state/telemetry";
+import CalibrationPanel from "../components/CalibrationPanel";
 
 export default function Settings() {
   const { reconnect, link } = useTelemetry();
@@ -45,6 +46,7 @@ export default function Settings() {
           <div className="text-xs text-fg-muted">Telemetry link: <span className="font-semibold">{link}</span></div>
         </div>
       </Panel>
+      <CalibrationPanel onSaved={reconnect} />
       <Notice tone="info" title="Network">
         Connect the laptop or tablet to the same Wi-Fi network as the Raspberry Pi. Manual control is protected by a server-side dead-man:
         if this device loses the connection, the rover stops on its own.

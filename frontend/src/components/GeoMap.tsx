@@ -2,7 +2,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useMemo } from "react";
 import { Circle, CircleMarker, MapContainer, Marker, Polygon, Polyline, TileLayer, Tooltip, useMap, useMapEvents } from "react-leaflet";
-import type { CoveragePlan, GeoPoint, LocalizationEstimate } from "../lib/types";
+import type { CoveragePlan, GeoPoint, GpsAnchor, LocalizationEstimate, ProjectedPosition } from "../lib/types";
 
 const vertexIcon = (index: number, start: boolean) =>
   L.divIcon({
@@ -33,6 +33,9 @@ function FitTo({ points, token }: { points: GeoPoint[]; token: number }) {
 }
 
 export interface GeoMapProps {
+  onAnchorChange?: (p: GeoPoint) => void;
+  anchor?: GpsAnchor | null;
+  projectedPosition?: ProjectedPosition | null;
   center: GeoPoint;
   tileUrl: string;
   attribution: string;
@@ -52,7 +55,7 @@ export interface GeoMapProps {
 
 export default function GeoMap({
   center, tileUrl, attribution, maxZoom, boundary, onBoundaryChange, editing = false, startVertex = 0, plan,
-  completedSegments = 0, position, trace, fitToken = 0, detections = [], height = "520px",
+  completedSegments = 0, position, trace, fitToken = 0, detections = [], height = "520px", onAnchorChange, anchor, projectedPosition,
 }: GeoMapProps) {
   const segs = useMemo(() => plan?.segments.filter((s) => s.geo_points && s.kind !== "pivot") ?? [], [plan]);
   const update = (i: number, p: GeoPoint) => onBoundaryChange?.(boundary.map((b, k) => (k === i ? p : b)));
@@ -62,7 +65,9 @@ export default function GeoMap({
     <div style={{ height }} className="overflow-hidden rounded-xl border border-ink-600">
       <MapContainer center={[center.lat, center.lon]} zoom={19} maxZoom={maxZoom} className="h-full w-full" zoomControl>
         <TileLayer url={tileUrl} attribution={attribution} maxZoom={maxZoom} maxNativeZoom={19} />
-        <ClickToAdd enabled={editing} onAdd={(p) => onBoundaryChange?.([...boundary, p])} />
+        <ClickToAdd enabled={editing || Boolean(onAnchorChange)} onAdd={(p) => onAnchorChange ? onAnchorChange(p) : onBoundaryChange?.([...boundary, p])} />
+        {anchor && <CircleMarker center={[anchor.lat, anchor.lon]} radius={5} pathOptions={{ color: "#f5b83d", fillOpacity: 1 }}><Tooltip>Fixed GPS origin</Tooltip></CircleMarker>}
+        {projectedPosition?.lat != null && projectedPosition.lon != null && <CircleMarker center={[projectedPosition.lat, projectedPosition.lon]} radius={8} pathOptions={{ color: "#f5b83d", fillOpacity: 0.7 }}><Tooltip permanent>Commanded estimate · x {projectedPosition.x.toFixed(2)} m, y {projectedPosition.y.toFixed(2)} m</Tooltip></CircleMarker>}
         <FitTo points={boundary.length ? boundary : [center]} token={fitToken} />
         {boundary.length >= 2 && (
           <Polygon positions={boundary.map((p) => [p.lat, p.lon])}
@@ -97,7 +102,7 @@ export default function GeoMap({
         ))}
         {detections.map((d, i) => (
           <CircleMarker key={`d${i}`} center={[d.lat, d.lon]} radius={7}
-            pathOptions={{ color: d.simulated ? "#b197fc" : "#ff5a5f", fillOpacity: 0.4 }}>
+            pathOptions={{ color: "#ff5a5f", fillColor: "#ff5a5f", fillOpacity: 0.7 }}>
             <Tooltip>{d.simulated ? "Simulated detection candidate" : "Detection candidate (unverified)"}</Tooltip>
           </CircleMarker>
         ))}

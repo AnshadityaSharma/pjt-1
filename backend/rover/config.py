@@ -377,7 +377,10 @@ class LocalizationConfig(_Base):
 
 
 class CameraConfig(_Base):
-    provider: Literal["none", "esp32cam", "simulated"] = "none"
+    provider: Literal["none", "esp32cam", "simulated", "picamera2", "opencv_v4l2"] = "none"
+    device_index: int = Field(0, ge=0)
+    width: int = Field(640, ge=160, le=4096)
+    height: int = Field(480, ge=120, le=4096)
     stream_url: str = "http://192.168.4.50:81/stream"
     snapshot_url: str = "http://192.168.4.50/capture"
     connect_timeout_s: float = Field(4.0, gt=0)
@@ -399,6 +402,8 @@ class VisionConfig(_Base):
     class_names: list[str] | None = None
     # Camera detections are only logged as events for these classes (empty = none).
     event_classes: list[str] = Field(default_factory=list)
+    on_detection_action: Literal["log", "pause_and_alert"] = "log"
+    snapshot_dir: str = "data/detection_snapshots"
     event_min_confidence: float = Field(0.6, ge=0, le=1.0)
     event_min_interval_s: float = Field(3.0, ge=0)
     weights_validated_for_task: bool = False

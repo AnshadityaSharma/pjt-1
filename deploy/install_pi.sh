@@ -3,8 +3,8 @@
 #
 #   cd ~/rover && ./deploy/install_pi.sh [--config config/hardware.yaml] [--vision] [--build-frontend]
 #
-# - installs system packages (python3-lgpio for Pi 5 GPIO)
-# - creates backend/.venv with --system-site-packages so lgpio is importable
+# - installs python3-gpiozero and python3-lgpio for Pi 5 GPIO
+# - creates backend/.venv with --system-site-packages so GPIO packages are importable
 # - adds the user to the gpio and dialout groups (GPIO, GPS serial)
 # - installs and enables the rover-backend systemd service
 # The service starts the rover DISARMED. Nothing moves until an operator arms it.
@@ -26,7 +26,7 @@ USER_NAME="${SUDO_USER:-$USER}"
 
 echo "==> System packages"
 sudo apt-get update
-sudo apt-get install -y python3-venv python3-dev python3-lgpio python3-pip git
+sudo apt-get install -y python3-venv python3-dev python3-gpiozero python3-lgpio python3-picamera2 python3-pip git
 
 echo "==> Groups (gpio, dialout) for ${USER_NAME}"
 sudo usermod -aG gpio,dialout "${USER_NAME}" || true
@@ -39,7 +39,7 @@ python3 -m venv --system-site-packages .venv
 if [[ ${VISION} -eq 1 ]]; then
   .venv/bin/pip install onnxruntime
 fi
-.venv/bin/python -c "import lgpio; print('lgpio OK')" || echo "WARNING: lgpio not importable - real hardware modes will report the motor driver unavailable"
+.venv/bin/python -c "import lgpio; from gpiozero.pins.lgpio import LGPIOFactory; print('gpiozero + lgpio OK')"
 
 echo "==> Validate configuration ${CONFIG}"
 .venv/bin/python -m rover --config "${CONFIG}" --check-config

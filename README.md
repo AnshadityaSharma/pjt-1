@@ -2,7 +2,7 @@
 
 Control, planning, safety and telemetry software for a four-wheel-drive survey
 rover built on a **Raspberry Pi 5**, an **L298N** motor driver, an **HC-SR04**
-ultrasonic sensor, an **IR obstacle sensor** and an **ESP32-CAM**. It runs on the
+ultrasonic sensor, an **IR obstacle sensor** and a **CSI Pi Camera / ESP32-CAM**. It runs on the
 Pi and is operated from a browser on a laptop or tablet on the same Wi-Fi.
 
 > **Scope.** This is a survey-rover *prototype* for controlled testing, sensor
@@ -78,7 +78,7 @@ git clone <this repo> ~/rover && cd ~/rover
 ./deploy/install_pi.sh --config config/hardware.yaml          # add --vision for YOLO, --build-frontend if Node is installed
 ```
 
-This installs `python3-lgpio`, creates `backend/.venv` with `--system-site-packages`,
+This installs `python3-gpiozero` and `python3-lgpio`, creates `backend/.venv` with `--system-site-packages`,
 validates the config, and enables the `rover-backend` systemd service. Open
 `http://<pi-ip>:8000` from a laptop or tablet. Read **docs/HARDWARE.md** (wiring,
 level shifting, pull-downs) and **docs/SAFETY.md** before powering the motors.
@@ -127,4 +127,5 @@ verification procedure.
 - [docs/CAMERA_VISION.md](docs/CAMERA_VISION.md): ESP32-CAM, YOLOv8n export, limitations
 - [docs/API.md](docs/API.md): REST and WebSocket reference
 - [docs/OPERATIONS.md](docs/OPERATIONS.md): field checklist
+- [docs/ANCHORED_SURVEY.md](docs/ANCHORED_SURVEY.md): manual/autonomous tabs, CSI camera, custom detection alerts, GPS anchor and quick calibration
 - [docs/TESTING.md](docs/TESTING.md): how to run tests; requirement-to-test map

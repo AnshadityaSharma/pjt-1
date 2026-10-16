@@ -14,7 +14,7 @@ export default function Camera() {
   const v = t.vision;
   return (
     <div className="grid gap-4 xl:grid-cols-[1fr_360px]">
-      <Panel title="ESP32-CAM" actions={
+      <Panel title="Rover camera" actions={
         <label className="flex items-center gap-2 text-xs text-fg-muted">
           <input type="checkbox" checked={overlay} onChange={(e) => setOverlay(e.target.checked)} className="accent-[#f5b83d]" /> Detection overlay
         </label>

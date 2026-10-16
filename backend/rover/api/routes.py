@@ -3,15 +3,17 @@
 from __future__ import annotations
 
 import asyncio
+import math
+from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
-from fastapi.responses import Response, StreamingResponse
+from fastapi.responses import FileResponse, Response, StreamingResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from rover.api.deps import get_runtime, require_auth
 from rover.core.enums import ReviewStatus
-from rover.planning.models import GeoPoint, GpsPlanRequest, GridPlanRequest
+from rover.planning.models import GeoPoint, GpsAnchor, GpsPlanRequest, GridPlanRequest
 from rover.planning.service import plan_gps, plan_grid
 from rover.runtime import RoverRuntime
 from rover.safety.supervisor import checks_to_dicts
@@ -32,6 +34,13 @@ class MissionCreate(_Body):
     name: str = Field(..., min_length=1, max_length=120)
     kind: Literal["grid", "gps"]
     params: dict[str, Any]
+    anchor_gps: GpsAnchor | None = None
+
+
+class QuickCalibration(_Body):
+    linear_speed_mps: float = Field(..., gt=0.005, le=3)
+    turn_90_duration_sec: float = Field(..., gt=0.05, le=120)
+    notes: str = Field("", max_length=500)
 
 
 class MissionUpdate(_Body):
@@ -97,6 +106,33 @@ async def status(rt: RoverRuntime = Rt) -> dict[str, Any]:
 @router.get("/config")
 async def config(rt: RoverRuntime = Rt) -> dict[str, Any]:
     return rt.config.redacted()
+
+
+def calibration_values(rt: RoverRuntime) -> dict[str, Any]:
+    c = rt.config.calibration
+    pivot = min(rt.config.mission.pivot_output, rt.config.motion.max_output)
+    return {"linear_speed_mps": c.full_speed_mps,
+            "turn_90_duration_sec": 90 / (c.full_pivot_dps * pivot),
+            "pivot_output": pivot, "calibrated": c.calibrated, "notes": c.notes}
+
+
+@router.get("/calibration")
+async def get_calibration(rt: RoverRuntime = Rt) -> dict[str, Any]:
+    return calibration_values(rt)
+
+
+@router.post("/calibration")
+async def save_calibration(body: QuickCalibration, rt: RoverRuntime = Rt) -> dict[str, Any]:
+    if rt.supervisor.armed or rt.missions.active is not None:
+        raise HTTPException(409, detail={"code": "busy", "message": "Disarm and unload the mission before changing calibration; re-plan afterwards."})
+    from rover.config import CalibrationConfig
+    pivot = min(rt.config.mission.pivot_output, rt.config.motion.max_output)
+    c = CalibrationConfig(full_speed_mps=body.linear_speed_mps,
+                          effective_track_m=2 * body.linear_speed_mps * pivot * body.turn_90_duration_sec / (math.pi / 2),
+                          calibrated=True, notes=body.notes)
+    rt.repo.set_meta("quick_calibration", c.model_dump())
+    rt.config.calibration = c
+    return calibration_values(rt)
 
 
 @router.get("/capabilities")
@@ -195,6 +231,10 @@ async def list_missions(rt: RoverRuntime = Rt, limit: int = Query(50, ge=1, le=5
 
 @router.post("/missions", status_code=201)
 async def create_mission(body: MissionCreate, rt: RoverRuntime = Rt) -> dict[str, Any]:
+    if body.anchor_gps is not None:
+        if body.kind != "grid":
+            raise HTTPException(422, detail={"code": "invalid_anchor", "message": "anchor_gps applies to grid missions"})
+        body.params["anchor_gps"] = body.anchor_gps.model_dump()
     return rt.missions.create(body.name, body.kind, body.params)
 
 
@@ -330,6 +370,17 @@ async def review_detection(det_id: int, body: ReviewBody, rt: RoverRuntime = Rt)
     if out is None:
         raise HTTPException(404, detail={"code": "not_found", "message": "detection not found"})
     return out
+
+
+@router.get("/detections/{det_id}/snapshot")
+async def detection_snapshot(det_id: int, rt: RoverRuntime = Rt) -> FileResponse:
+    row = rt.repo.get_detection(det_id)
+    filename = (row.get("data") or {}).get("snapshot_file") if row else None
+    root = Path(rt.config.vision.snapshot_dir).resolve()
+    path = (root / filename).resolve() if isinstance(filename, str) else None
+    if path is None or path.parent != root or not path.is_file():
+        raise HTTPException(404, detail={"code": "not_found", "message": "snapshot not available"})
+    return FileResponse(path, media_type="image/jpeg", headers={"Cache-Control": "no-store"})
 
 
 # ---------------------------------------------------------------- boundaries

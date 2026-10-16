@@ -112,10 +112,30 @@ def plan_grid(cfg: RoverConfig, req: GridPlanRequest) -> CoveragePlan:
     note = SIM_NOTE if cfg.is_simulation else OPEN_LOOP_NOTE
     if cfg.is_simulation and cfg.localization.provider == "none":
         note = SIM_NOTE + " " + OPEN_LOOP_NOTE
+    anchor = req.anchor_gps
+    boundary_geo = None
+    if anchor:
+        from rover.planning.geo import project_grid
+
+        def anchored(x: float, y: float) -> GeoPoint:
+            lat, lon = project_grid(anchor, x, y)
+            return GeoPoint(lat=lat, lon=lon)
+
+        boundary_geo = [anchored(x, y) for x, y in inp.boundary]
+        for seg in res.segments:
+            seg.geo_points = [anchored(p.x, p.y) for p in seg.points]
+        for wp in res.waypoints:
+            g = anchored(wp.x, wp.y)
+            wp.lat, wp.lon = g.lat, g.lon
+        note += " GPS anchor is a fixed reference; projected positions are commanded dead reckoning, not GPS fixes."
+        import hashlib
+        res.plan_hash = hashlib.sha256((res.plan_hash + anchor.model_dump_json()).encode()).hexdigest()[:16]
     return CoveragePlan(
         planner_version=PLANNER_VERSION,
         kind="grid",
         frame="grid_local",
+        anchor_gps=anchor,
+        boundary_geo=boundary_geo,
         boundary=[Point(x=x, y=y) for x, y in inp.boundary],
         inner_boundary=res.inner,
         lane_heading_deg=lane_heading,

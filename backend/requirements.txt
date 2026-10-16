@@ -1,4 +1,4 @@
-# Core runtime (pinned minimums; see pyproject.toml). On the Pi also: sudo apt install python3-lgpio
+# Core runtime; GPIO stays optional on laptops. Pi: pip install -r requirements-pi.txt
 fastapi>=0.115,<1
 uvicorn[standard]>=0.30
 pydantic>=2.7,<3

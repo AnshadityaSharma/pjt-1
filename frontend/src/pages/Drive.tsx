@@ -119,7 +119,7 @@ export default function Drive() {
       <div className="space-y-4">
         <Panel title="Arming"><ArmControl /></Panel>
         <Panel
-          title="Manual control"
+          title="Manual Remote Control Panel"
           actions={<Chip tone={acquired ? "ok" : ctl.link === "connecting" ? "info" : "muted"}>{acquired ? "in control" : ctl.link}</Chip>}
         >
           {missionOwns && <Notice tone="warn" className="mb-3">An autonomous mission owns the motors. Stop the mission to drive manually.</Notice>}
@@ -235,7 +235,7 @@ function HoldButton({ label, glyph, onHold, onRelease, active, stop }: {
         stop ? "border-bad/50 bg-bad/15 text-bad" : active ? "border-amber bg-amber text-ink-950" : "border-ink-500 bg-ink-700 text-fg active:bg-ink-600",
       )}
     >
-      {glyph}
+      <span className="block">{glyph}</span><span className="block text-xs font-semibold">{label}</span>
     </button>
   );
 }

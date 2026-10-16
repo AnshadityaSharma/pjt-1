@@ -2,6 +2,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useTelemetry } from "../state/telemetry";
 import { EStopButton, EstopBanner, ModeBadge } from "./safety";
 import { Chip, Dot, cx, type Tone } from "./ui";
+import ControlModeNav from "./ControlModeNav";
+import DetectionAlert from "./DetectionAlert";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: "M3 12l9-8 9 8M5 10v10h14V10" },
@@ -60,7 +62,7 @@ export default function Layout() {
               <Chip tone={s.armed ? "warn" : "muted"}>{s.armed ? "Armed" : "Disarmed"}</Chip>
             )}
             {state && state !== "IDLE" && <Chip tone={STATE_TONE[state]} className="hidden md:inline-flex">{state.replace("_", " ")}</Chip>}
-            <EStopButton />
+            <EStopButton large />
           </div>
         </div>
         <nav aria-label="Main" className="scrollbar-thin flex gap-1 overflow-x-auto border-t border-ink-700/60 px-2 py-1.5 lg:hidden">
@@ -73,6 +75,7 @@ export default function Layout() {
           ))}
         </nav>
         <EstopBanner />
+        <DetectionAlert />
         {link !== "live" && link !== "connecting" && (
           <div className="border-t border-warn/40 bg-warn/10 px-4 py-1.5 text-xs text-warn" role="status">
             {link === "unauthorized"
@@ -94,6 +97,7 @@ export default function Layout() {
           </nav>
         </aside>
         <main className="min-w-0 flex-1 p-3 sm:p-5">
+          <ControlModeNav />
           <Outlet />
         </main>
       </div>

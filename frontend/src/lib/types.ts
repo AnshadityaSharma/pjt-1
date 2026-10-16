@@ -150,6 +150,7 @@ export interface MissionProgress {
 }
 
 export interface ActiveMissionInfo {
+  projected_position?: ProjectedPosition | null;
   id: string;
   name: string;
   kind: "grid" | "gps";
@@ -257,6 +258,7 @@ export interface SimSnapshot {
 }
 
 export interface Telemetry {
+  detections?: DetectionEvent[];
   type: "telemetry";
   seq: number;
   ts: string;
@@ -352,6 +354,7 @@ export interface PlanSummary {
 }
 
 export interface CoveragePlan {
+  anchor_gps?: GpsAnchor | null;
   planner_version: string;
   kind: "grid" | "gps";
   frame: "grid_local" | "enu";
@@ -413,6 +416,9 @@ export interface DetectionEvent {
   review_note: string | null;
   reviewed_at: string | null;
 }
+
+export interface GpsAnchor extends GeoPoint { heading_deg: number }
+export interface ProjectedPosition { x: number; y: number; lat: number | null; lon: number | null; provider: string; measured: boolean }
 
 export interface Boundary { id: number; name: string; points: GeoPoint[]; created_at: string; updated_at: string }
 

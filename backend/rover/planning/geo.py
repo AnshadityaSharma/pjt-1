@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from rover.planning.models import GpsAnchor
 
 _A = 6378137.0  # WGS-84 semi-major axis
 _F = 1 / 298.257223563
@@ -76,3 +77,11 @@ def haversine_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     dp, dl = p2 - p1, math.radians(lon2 - lon1)
     a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
     return 2 * r * math.asin(math.sqrt(a))
+
+
+def project_grid(anchor: GpsAnchor, x: float, y: float) -> tuple[float, float]:
+    """Rotate grid metres by the anchor bearing and project to WGS-84."""
+    h = math.radians(anchor.heading_deg)
+    east = x * math.cos(h) + y * math.sin(h)
+    north = -x * math.sin(h) + y * math.cos(h)
+    return EnuFrame(anchor.lat, anchor.lon).to_geodetic(east, north)

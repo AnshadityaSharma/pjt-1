@@ -7,6 +7,9 @@ import type { CoveragePlan, MissionRecord } from "../lib/types";
 import { convert, type Unit } from "../lib/units";
 import { useTelemetry } from "../state/telemetry";
 import { Loading } from "./Dashboard";
+import GpsAnchorPanel from "../components/GpsAnchorPanel";
+import CalibrationPanel from "../components/CalibrationPanel";
+import type { GpsAnchor } from "../lib/types";
 
 type Corner = "near_left" | "near_right" | "far_left" | "far_right";
 
@@ -56,9 +59,11 @@ function reverseCorner(c: Corner, orientation: Form["lane_orientation"]): Corner
 }
 
 export default function PlanGrid() {
-  const { telemetry: t, system } = useTelemetry();
+  const { telemetry: t, system, reconnect } = useTelemetry();
   const nav = useNavigate();
   const [f, setF] = useState<Form>(DEFAULT);
+  const [anchor, setAnchor] = useState<GpsAnchor | null>(null);
+  const [calibrationVersion, setCalibrationVersion] = useState(0);
   const [plan, setPlan] = useState<CoveragePlan | null>(null);
   const [error, setError] = useState<ApiError | null>(null);
   const [saving, setSaving] = useState(false);
@@ -84,8 +89,9 @@ export default function PlanGrid() {
       turn_radius: f.turn_strategy === "arc" ? f.turn_radius : null,
       speed_mps: f.speed_mps,
       execution_mode: t.mode,
+      anchor_gps: anchor,
     };
-  }, [f, t?.mode]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [f, t?.mode, anchor, calibrationVersion]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Debounced live preview.
   useEffect(() => {
@@ -142,6 +148,7 @@ export default function PlanGrid() {
           <Field label="Mission name">
             <input className="input" value={f.name} maxLength={120} onChange={(e) => set("name", e.target.value)} />
           </Field>
+          <Button className="w-full" onClick={() => { setF({ ...DEFAULT, name: "5m × 5m Demo", length: 5, width: 5, lane_spacing: 0.5, swath_width: 0.5 }); setSaved(null); }}>Quick 5m x 5m Demo Box</Button>
           <div className="flex items-end justify-between gap-3">
             <Field label="Units">
               <Segmented value={u} onChange={changeUnits} ariaLabel="Units"
@@ -220,6 +227,7 @@ export default function PlanGrid() {
       </Panel>
 
       <div className="space-y-4">
+        <div className="grid gap-4 lg:grid-cols-2"><GpsAnchorPanel anchor={anchor} onChange={(v) => { setAnchor(v); setSaved(null); }} system={system} /><CalibrationPanel onSaved={() => { setCalibrationVersion((v) => v + 1); setSaved(null); reconnect(); }} /></div>
         <Panel title="Route preview" actions={plan && <span className="font-mono text-[11px] text-fg-faint">#{plan.plan_hash}</span>}>
           {plan ? (
             <PathView plan={plan} className="h-[52vh] min-h-[320px]" sim={t.simulation} showSimTruth={false} />

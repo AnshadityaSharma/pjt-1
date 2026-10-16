@@ -5,7 +5,7 @@ import { ArmControl } from "../components/safety";
 import { EventLog } from "../components/status";
 import { Button, Chip, Empty, ErrorList, Meter, Notice, Panel, Stat, type Tone } from "../components/ui";
 import { ApiError, api, post } from "../lib/api";
-import type { CoveragePlan, GeoPoint, MissionRecord, MissionSnapshot } from "../lib/types";
+import type { CoveragePlan, DetectionEvent, GeoPoint, MissionRecord, MissionSnapshot } from "../lib/types";
 import { fmtDateTime, fmtDistance, fmtDuration } from "../lib/units";
 import { useTelemetry } from "../state/telemetry";
 import { Loading } from "./Dashboard";
@@ -17,19 +17,30 @@ const STATE_TONE: Record<string, Tone> = {
 };
 
 /** Display-only flat-earth conversion from the plan's local ENU frame to lat/lon. */
-function enuToGeo(origin: GeoPoint, x: number, y: number): GeoPoint {
-  const lat = origin.lat + y / 111_320;
-  return { lat, lon: origin.lon + x / (111_320 * Math.cos((origin.lat * Math.PI) / 180)) };
+function enuToGeo(origin: GeoPoint, x: number, y: number, heading = 0): GeoPoint {
+  const h = heading * Math.PI / 180;
+  const east = x * Math.cos(h) + y * Math.sin(h);
+  const north = -x * Math.sin(h) + y * Math.cos(h);
+  const lat = origin.lat + north / 111_320;
+  return { lat, lon: origin.lon + east / (111_320 * Math.cos((origin.lat * Math.PI) / 180)) };
 }
 
 export default function Mission() {
   const { telemetry: t, events, system } = useTelemetry();
   const [plan, setPlan] = useState<CoveragePlan | null>(null);
   const [trace, setTrace] = useState<[number, number][]>([]);
+  const [detections, setDetections] = useState<DetectionEvent[]>([]);
   const [error, setError] = useState<ApiError | null>(null);
   const [busy, setBusy] = useState(false);
   const planFor = useRef<string | null>(null);
   const missionId = t?.mission.mission?.id ?? null;
+
+  useEffect(() => {
+    setDetections([]);
+    let cancelled = false;
+    if (missionId) api<DetectionEvent[]>(`/api/missions/${missionId}/detections`).then((rows) => { if (!cancelled) setDetections(rows); }).catch(() => {});
+    return () => { cancelled = true; };
+  }, [missionId]);
 
   // Fetch the full plan once per mission, and the trace periodically.
   useEffect(() => {
@@ -85,7 +96,10 @@ export default function Mission() {
   if (!m) return <NoMission state={state} lastResult={ms.last_result} />;
 
   const openLoop = m.execution === "open_loop";
-  const geoTrace = plan?.origin ? trace.map(([x, y]) => enuToGeo(plan.origin!, x, y)) : [];
+  const mapOrigin = plan?.anchor_gps ?? plan?.origin;
+  const geoTrace = mapOrigin ? trace.map(([x, y]) => enuToGeo(mapOrigin, x, y, plan?.anchor_gps?.heading_deg ?? 0)) : [];
+  const detectionRows = [...new Map<number, DetectionEvent>([...detections, ...(t.detections ?? [])].filter((d) => d.mission_id === missionId).map((d) => [d.id, d])).values()];
+  const markers = detectionRows.flatMap((d) => d.position?.lat != null && d.position.lon != null ? [{ lat: d.position.lat, lon: d.position.lon, simulated: d.simulated }] : []);
 
   return (
     <div className="space-y-4">
@@ -109,14 +123,14 @@ export default function Mission() {
       {error && <ErrorList title={error.message} lines={error.details} />}
 
       <div className="grid gap-4 xl:grid-cols-[1fr_380px]">
-        <Panel title={m.kind === "gps" ? "Route map" : "Route (local grid frame)"}>
+        <Panel title={m.kind === "gps" || plan?.anchor_gps ? "Route map" : "Route (local grid frame)"}>
           {!plan ? (
             <div className="h-[50vh] animate-pulse rounded-lg bg-ink-800" />
-          ) : m.kind === "gps" && system ? (
+          ) : (m.kind === "gps" || plan.anchor_gps) && system ? (
             <Suspense fallback={<div className="h-[50vh] animate-pulse rounded-lg bg-ink-800" />}>
-              <GeoMap center={plan.boundary_geo?.[0] ?? plan.origin!} tileUrl={system.ui.map_tile_url} attribution={system.ui.map_tile_attribution}
+              <GeoMap center={plan.boundary_geo?.[0] ?? mapOrigin!} tileUrl={system.ui.map_tile_url} attribution={system.ui.map_tile_attribution}
                 maxZoom={system.ui.map_max_zoom} boundary={plan.boundary_geo ?? []} plan={plan} completedSegments={p?.segment_index ?? 0}
-                position={t.localization.estimate} trace={geoTrace} height="58vh" fitToken={1} />
+                position={plan.anchor_gps ? null : t.localization.estimate} projectedPosition={m.projected_position} anchor={plan.anchor_gps} detections={markers} trace={geoTrace} height="58vh" fitToken={1} />
             </Suspense>
           ) : (
             <PathView
