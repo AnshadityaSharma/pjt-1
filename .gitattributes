@@ -1,0 +1,5 @@
+# Preserve document/image bytes when checking out on Windows, macOS or Linux.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary

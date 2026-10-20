@@ -1,0 +1,46 @@
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const path = require('path');
+const root = path.resolve(__dirname, '../..');
+const base = process.env.DEMO_URL || 'http://127.0.0.1:5173';
+(async () => {
+  const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL || undefined, headless: true });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1.5 });
+  const page = await context.newPage();
+  const errors = [], requests = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  page.on('request', (r) => { if (/\/api\/|\/ws\//.test(r.url())) requests.push(r.url()); });
+  await page.goto(base + '/');
+  await page.getByRole('heading', { name: 'Safety', exact: true }).waitFor();
+  await page.screenshot({ path: path.join(root, 'docs/images/dashboard.png') });
+  await page.getByRole('link', { name: 'Manual Remote Control', exact: true }).click();
+  await page.getByRole('button', { name: 'Take manual control', exact: true }).click();
+  await page.getByRole('button', { name: 'Arm (simulated)', exact: true }).click();
+  await page.getByRole('group', { name: 'Drive buttons' }).waitFor();
+  await page.getByRole('button', { name: 'Forward', exact: true }).hover();
+  await page.mouse.down();
+  await page.waitForTimeout(250);
+  await page.mouse.up();
+  await page.keyboard.press('ArrowUp');
+  await page.screenshot({ path: path.join(root, 'docs/images/manual-control.png') });
+  await page.locator('section').filter({ has: page.getByRole('heading', { name: 'Manual Remote Control Panel', exact: true }) }).screenshot({ path: path.join(root, 'docs/images/manual-panel.png') });
+  await page.getByRole('button', { name: 'Release', exact: true }).click();
+  await page.getByRole('link', { name: 'Autonomous Boustrophedon', exact: true }).click();
+  await page.getByRole('button', { name: 'Quick 5m x 5m Demo Box', exact: true }).click();
+  await page.waitForTimeout(600);
+  await page.getByRole('button', { name: 'Save & load mission', exact: true }).waitFor({ state: 'visible' });
+  await page.screenshot({ path: path.join(root, 'docs/images/grid-planner.png'), fullPage: true });
+  const route = page.locator('section').filter({ has: page.getByRole('heading', { name: 'Route preview', exact: true }) });
+  await route.screenshot({ path: path.join(root, 'docs/images/route-preview.png') });
+  await page.getByRole('button', { name: 'Save & load mission', exact: true }).click();
+  await page.getByRole('button', { name: 'Start mission', exact: true }).click();
+  await page.getByRole('button', { name: 'Pause', exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Pause', exact: true }).click();
+  await page.getByRole('button', { name: 'Resume', exact: true }).waitFor();
+  for (const url of ['/sensors', '/camera', '/missions', '/system', '/settings', '/plan/gps']) {
+    await page.goto(base + url);
+    await page.waitForTimeout(250);
+  }
+  console.log(JSON.stringify({ pageErrors: errors, roverNetworkRequests: requests, screenshots: 5 }, null, 2));
+  await browser.close();
+  if (errors.length || requests.length) process.exitCode = 1;
+})().catch((e) => { console.error(e); process.exit(1); });

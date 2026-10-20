@@ -4,6 +4,7 @@ import { EStopButton, EstopBanner, ModeBadge } from "./safety";
 import { Chip, Dot, cx, type Tone } from "./ui";
 import ControlModeNav from "./ControlModeNav";
 import DetectionAlert from "./DetectionAlert";
+import { demoEnabled } from "../demo/presentation";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: "M3 12l9-8 9 8M5 10v10h14V10" },
@@ -75,6 +76,7 @@ export default function Layout() {
           ))}
         </nav>
         <EstopBanner />
+        {demoEnabled && <div className="border-t border-sim/40 bg-sim/15 px-4 py-2 text-sm text-sim" role="status"><strong>PRESENTATION DEMO</strong> · Sample data in this browser. No rover connection or real measurements. Grid sketches and mission animation are simplified; camera is a still image. Reload to reset.</div>}
         <DetectionAlert />
         {link !== "live" && link !== "connecting" && (
           <div className="border-t border-warn/40 bg-warn/10 px-4 py-1.5 text-xs text-warn" role="status">

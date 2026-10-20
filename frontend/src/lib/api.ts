@@ -1,4 +1,5 @@
 // Minimal typed REST client. The backend URL and token are runtime settings
+import { demoApi, demoEnabled } from "../demo/presentation";
 // (Settings page) so the frontend can be deployed separately from the Pi.
 
 const LS_BASE = "rover.backendUrl";
@@ -50,6 +51,8 @@ export function wsUrl(path: string): string {
 }
 
 export function httpUrl(path: string, withToken = false): string {
+  if (demoEnabled && path.startsWith("/api/camera/")) return "/demo/camera.jpg";
+  if (demoEnabled) return "data:text/plain;charset=utf-8," + encodeURIComponent("Presentation demo: exports and real snapshots require the full backend simulator.");
   const url = backendUrl() + path;
   const token = authToken();
   return withToken && token ? `${url}${url.includes("?") ? "&" : "?"}token=${encodeURIComponent(token)}` : url;
@@ -80,6 +83,10 @@ export class ApiError extends Error {
 }
 
 export async function api<T = unknown>(path: string, init: RequestInit & { json?: unknown } = {}): Promise<T> {
+  if (demoEnabled) {
+    try { return await demoApi(path, init) as T; }
+    catch (e) { throw new ApiError(400, "presentation", (e as Error).message); }
+  }
   const headers = new Headers(init.headers);
   const token = authToken();
   if (token) headers.set("Authorization", `Bearer ${token}`);

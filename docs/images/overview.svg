@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="370" viewBox="0 0 1500 370" role="img" aria-labelledby="title desc">
+<title id="title">Autonomous Survey Rover Platform</title><desc id="desc">Browser control, coverage planning and sensor telemetry for a Raspberry Pi 5 research rover</desc>
+<defs><pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" fill="none" stroke="#1c3546" stroke-width="1"/></pattern><linearGradient id="bg"><stop stop-color="#091723"/><stop offset="1" stop-color="#102d37"/></linearGradient></defs>
+<rect width="1500" height="370" rx="24" fill="url(#bg)"/><rect x="910" width="590" height="370" fill="url(#grid)" opacity=".7"/>
+<rect x="50" y="46" width="185" height="30" rx="15" fill="#133d43"/><text x="68" y="67" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="2" fill="#6ee2d2">RESEARCH PLATFORM</text>
+<text x="50" y="150" font-family="Arial,sans-serif" font-size="57" font-weight="bold" fill="#f4f7f9">Survey Rover</text><text x="53" y="195" font-family="Arial,sans-serif" font-size="28" fill="#c1d1dc">Plan the route. Control the rover. Review the data.</text>
+<text x="53" y="259" font-family="Arial,sans-serif" font-size="18" fill="#80a3b8">Raspberry Pi 5  /  React + FastAPI  /  Boustrophedon coverage</text>
+<rect x="53" y="292" width="164" height="35" rx="8" fill="#eab74b"/><text x="77" y="315" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#0a1b27">BROWSER CONTROL</text><text x="238" y="315" font-family="Arial,sans-serif" font-size="15" fill="#97b5c6">Node-only presentation demo included</text>
+<rect x="1020" y="55" width="364" height="264" rx="17" fill="#0c1d29" stroke="#42616b" stroke-width="2"/><path d="M1070 270V100H1119V270H1168V100H1217V270H1266V100H1315V270" stroke="#f4bd4b" stroke-width="7" fill="none" stroke-linejoin="round"/><circle cx="1070" cy="270" r="11" fill="#53d5ae"/><circle cx="1315" cy="270" r="11" fill="#ed6368"/><text x="1070" y="305" font-family="Arial,sans-serif" font-size="13" fill="#8bafbf">COVERAGE  /  TELEMETRY  /  MISSIONS</text>
+</svg>

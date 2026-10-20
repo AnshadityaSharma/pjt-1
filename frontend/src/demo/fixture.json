@@ -1,0 +1,4446 @@
+{
+  "telemetry": {
+    "type": "telemetry",
+    "seq": 1,
+    "ts": "2026-10-20T15:35:23.561913+00:00",
+    "mode": "simulation",
+    "simulated": true,
+    "rover_name": "Survey Rover - Presentation Demo",
+    "safety": {
+      "armed": false,
+      "armed_at": null,
+      "armed_by": null,
+      "simulated_arming": true,
+      "estop_latched": false,
+      "estop_reason": null,
+      "estop_source": null,
+      "estop_at": null,
+      "estop_input": {
+        "configured": false,
+        "pressed": null,
+        "error": null,
+        "hardware_cutoff": false
+      },
+      "motion_permitted": false,
+      "motion_blocked_reason": "rover is disarmed",
+      "obstacles": {
+        "front": {
+          "state": "clear",
+          "distance_m": null,
+          "blocked": false,
+          "slow": false,
+          "reasons": []
+        },
+        "rear": {
+          "state": "disabled",
+          "distance_m": null,
+          "blocked": false,
+          "slow": false,
+          "reasons": []
+        },
+        "sensors": [
+          {
+            "id": "front_ultrasonic",
+            "role": "front",
+            "state": "clear",
+            "distance_m": null
+          },
+          {
+            "id": "front_ir",
+            "role": "front",
+            "state": "clear",
+            "distance_m": null
+          }
+        ]
+      }
+    },
+    "motion": {
+      "owner": "none",
+      "holder_id": null,
+      "requested": {
+        "left": 0.0,
+        "right": 0.0
+      },
+      "target": {
+        "left": 0.0,
+        "right": 0.0
+      },
+      "applied": {
+        "left": 0.0,
+        "right": 0.0
+      },
+      "lease_remaining_s": null,
+      "blocked_reason": null,
+      "limited_reason": null,
+      "interlock_active": false,
+      "control_loop_ok": true,
+      "max_output": 0.85,
+      "epoch": 0,
+      "driver": {
+        "driver": "simulated",
+        "simulated": true,
+        "initialized": true,
+        "healthy": true,
+        "error": null,
+        "outputs": {
+          "left": 0.0,
+          "right": 0.0
+        },
+        "watchdog_timeout_s": 0.5,
+        "watchdog_tripped": false,
+        "watchdog_trips": 0
+      }
+    },
+    "manual": {
+      "session_active": false,
+      "client_id": null,
+      "last_message_age_s": null,
+      "deadman_timeout_s": 0.35,
+      "heartbeat_interval_s": 0.1,
+      "max_continuous_s": 20.0,
+      "continuous_s": 0.0,
+      "hold_limit_hit": false,
+      "deadman_trips": 0,
+      "last_command": null,
+      "default_speed": 0.5,
+      "max_speed": 0.8
+    },
+    "mission": {
+      "state": "READY",
+      "last_result": null,
+      "mission": {
+        "id": "42b42878-7255-4dbd-a313-c46f2f013cd3",
+        "name": "5 x 5 m sample survey",
+        "kind": "grid",
+        "execution": "open_loop",
+        "pause_reason": null,
+        "invalidated": null,
+        "message": "",
+        "progress": null,
+        "projected_position": null,
+        "plan_hash": "c771360f1e802f677f7f",
+        "summary": {
+          "lane_count": 10,
+          "cell_count": 1,
+          "segment_count": 37,
+          "total_length_m": 52.3,
+          "lane_length_m": 48.0,
+          "turn_length_m": 4.3,
+          "transit_length_m": 0.0,
+          "pivot_count": 18,
+          "total_rotation_deg": 1620.0,
+          "estimated_duration_s": 288.0,
+          "area_m2": 25.0,
+          "inner_area_m2": 23.04,
+          "covered_area_m2": 23.04,
+          "nominal_coverage_ratio": 0.9216,
+          "lane_spacing_m": 0.5,
+          "swath_width_m": 0.5,
+          "speed_mps": 0.2
+        },
+        "localization_note": "Simulation: execution and coverage are simulated. No physical localization is available: this route is a COMMANDED path executed open-loop from timed motor commands and the calibration model. Displayed progress is an estimate of commanded motion, not proof that the rover physically covered the area."
+      }
+    },
+    "localization": {
+      "provider": {
+        "provider": "none",
+        "kind": "none",
+        "simulated": false,
+        "experimental": false,
+        "stationary_heading": false
+      },
+      "estimate": {
+        "provider": "none",
+        "kind": "none",
+        "simulated": false,
+        "status": "unavailable",
+        "message": "No localization source is installed: physical position and heading are unavailable. Grid missions run open-loop (commanded motion only).",
+        "position_valid": false,
+        "x": null,
+        "y": null,
+        "lat": null,
+        "lon": null,
+        "alt": null,
+        "horizontal_accuracy_m": null,
+        "accuracy_source": null,
+        "heading_valid": false,
+        "heading_deg": null,
+        "heading_source": null,
+        "heading_accuracy_deg": null,
+        "speed_mps": null,
+        "fix_quality": null,
+        "satellites": null,
+        "hdop": null,
+        "timestamp": "2026-10-20T15:35:23.561913+00:00",
+        "experimental": false,
+        "extra": {},
+        "age_s": 0.0
+      },
+      "magnetic_heading": [
+        {
+          "available": true,
+          "reliable": false,
+          "heading_deg": null,
+          "reasons": [
+            "magnetometer not calibrated (hard/soft-iron)",
+            "no tilt compensation (IMU orientation fusion not available) and level operation not asserted"
+          ],
+          "field_ut": {
+            "x": 12.127,
+            "y": 30.311,
+            "z": -25.925,
+            "magnitude": 41.688
+          },
+          "calibrated": false,
+          "sensor_id": "magnetometer",
+          "simulated": true,
+          "used_for_navigation": false
+        }
+      ],
+      "fusion": {
+        "implemented": [
+          "gnss_position_with_cog_heading",
+          "wheel_odometry_dead_reckoning(experimental)",
+          "odometry_with_imu_yaw_rate(experimental)"
+        ],
+        "not_implemented": [
+          "gnss_odometry_fusion",
+          "imu_orientation_fusion",
+          "magnetometer_heading_fusion"
+        ]
+      }
+    },
+    "sensors": [
+      {
+        "id": "front_ultrasonic",
+        "type": "ultrasonic",
+        "label": "Front ultrasonic (HC-SR04)",
+        "driver": "simulated",
+        "enabled": true,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": true,
+        "state": "connected",
+        "reading_health": "ok",
+        "available": true,
+        "error": null,
+        "rate_hz": 12.0,
+        "stale_after_s": 0.3,
+        "age_s": 0.109,
+        "reconnects": 0,
+        "readings_total": 2,
+        "invalid_total": 0,
+        "last_reading": {
+          "sensor_id": "front_ultrasonic",
+          "sensor_type": "ultrasonic",
+          "timestamp": "2026-10-20T15:35:23.452371+00:00",
+          "value": {
+            "distance": null,
+            "beyond_range": true
+          },
+          "units": {
+            "distance": "m",
+            "beyond_range": "bool"
+          },
+          "valid": true,
+          "simulated": true,
+          "error": null,
+          "metadata": {}
+        },
+        "last_valid_at": "2026-10-20T15:35:23.452371+00:00",
+        "calibration": {
+          "state": "not_applicable"
+        },
+        "safety_role": "front"
+      },
+      {
+        "id": "front_ir",
+        "type": "ir_obstacle",
+        "label": "Front IR",
+        "driver": "simulated",
+        "enabled": true,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "connected",
+        "reading_health": "ok",
+        "available": true,
+        "error": null,
+        "rate_hz": 30.0,
+        "stale_after_s": 0.3,
+        "age_s": 0.078,
+        "reconnects": 0,
+        "readings_total": 5,
+        "invalid_total": 0,
+        "last_reading": {
+          "sensor_id": "front_ir",
+          "sensor_type": "ir_obstacle",
+          "timestamp": "2026-10-20T15:35:23.485878+00:00",
+          "value": {
+            "obstacle": false,
+            "raw_level": 1
+          },
+          "units": {
+            "obstacle": "bool",
+            "raw_level": "logic"
+          },
+          "valid": true,
+          "simulated": true,
+          "error": null,
+          "metadata": {}
+        },
+        "last_valid_at": "2026-10-20T15:35:23.485878+00:00",
+        "calibration": {
+          "state": "not_applicable"
+        },
+        "safety_role": "front"
+      },
+      {
+        "id": "metal",
+        "type": "metal_detector",
+        "label": "Metal detector (simulated)",
+        "driver": "simulated",
+        "enabled": true,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "connected",
+        "reading_health": "ok",
+        "available": true,
+        "error": null,
+        "rate_hz": 10.0,
+        "stale_after_s": 0.3,
+        "age_s": 0.109,
+        "reconnects": 0,
+        "readings_total": 2,
+        "invalid_total": 0,
+        "last_reading": {
+          "sensor_id": "metal",
+          "sensor_type": "metal_detector",
+          "timestamp": "2026-10-20T15:35:23.454365+00:00",
+          "value": {
+            "signal": 0.0079,
+            "triggered": false
+          },
+          "units": {
+            "signal": "normalized",
+            "triggered": "bool"
+          },
+          "valid": true,
+          "simulated": true,
+          "error": null,
+          "metadata": {}
+        },
+        "last_valid_at": "2026-10-20T15:35:23.454365+00:00",
+        "calibration": {
+          "state": "simulated"
+        },
+        "safety_role": null
+      },
+      {
+        "id": "magnetometer",
+        "type": "magnetometer",
+        "label": "Magnetometer (simulated, uncalibrated)",
+        "driver": "simulated",
+        "enabled": true,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "connected",
+        "reading_health": "ok",
+        "available": true,
+        "error": null,
+        "rate_hz": 10.0,
+        "stale_after_s": 0.3,
+        "age_s": 0.109,
+        "reconnects": 0,
+        "readings_total": 2,
+        "invalid_total": 0,
+        "last_reading": {
+          "sensor_id": "magnetometer",
+          "sensor_type": "magnetometer",
+          "timestamp": "2026-10-20T15:35:23.453358+00:00",
+          "value": {
+            "x": 12.127,
+            "y": 30.311,
+            "z": -25.925,
+            "magnitude": 41.689
+          },
+          "units": {
+            "x": "uT",
+            "y": "uT",
+            "z": "uT",
+            "magnitude": "uT"
+          },
+          "valid": true,
+          "simulated": true,
+          "error": null,
+          "metadata": {
+            "frame": "body_xright_yforward_zup"
+          }
+        },
+        "last_valid_at": "2026-10-20T15:35:23.453358+00:00",
+        "calibration": {
+          "state": "uncalibrated",
+          "calibrated": false,
+          "method": null,
+          "calibrated_at": null,
+          "hard_iron_ut": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "soft_iron": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "motor_interference_checked": false
+        },
+        "safety_role": null
+      },
+      {
+        "id": "imu",
+        "type": "imu",
+        "label": "imu",
+        "driver": "simulated",
+        "enabled": false,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "disabled",
+        "reading_health": "none",
+        "available": false,
+        "error": null,
+        "rate_hz": 50.0,
+        "stale_after_s": 0.3,
+        "age_s": null,
+        "reconnects": 0,
+        "readings_total": 0,
+        "invalid_total": 0,
+        "last_reading": null,
+        "last_valid_at": null,
+        "calibration": {
+          "state": "unknown"
+        },
+        "safety_role": null
+      },
+      {
+        "id": "left_encoder",
+        "type": "wheel_encoder",
+        "label": "left_encoder",
+        "driver": "simulated",
+        "enabled": false,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "disabled",
+        "reading_health": "none",
+        "available": false,
+        "error": null,
+        "rate_hz": 50.0,
+        "stale_after_s": 0.3,
+        "age_s": null,
+        "reconnects": 0,
+        "readings_total": 0,
+        "invalid_total": 0,
+        "last_reading": null,
+        "last_valid_at": null,
+        "calibration": {
+          "state": "unknown"
+        },
+        "safety_role": null
+      },
+      {
+        "id": "right_encoder",
+        "type": "wheel_encoder",
+        "label": "right_encoder",
+        "driver": "simulated",
+        "enabled": false,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "disabled",
+        "reading_health": "none",
+        "available": false,
+        "error": null,
+        "rate_hz": 50.0,
+        "stale_after_s": 0.3,
+        "age_s": null,
+        "reconnects": 0,
+        "readings_total": 0,
+        "invalid_total": 0,
+        "last_reading": null,
+        "last_valid_at": null,
+        "calibration": {
+          "state": "unknown"
+        },
+        "safety_role": null
+      },
+      {
+        "id": "battery",
+        "type": "battery",
+        "label": "Battery (simulated)",
+        "driver": "simulated",
+        "enabled": true,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "connected",
+        "reading_health": "ok",
+        "available": true,
+        "error": null,
+        "rate_hz": 1.0,
+        "stale_after_s": 5.0,
+        "age_s": 0.203,
+        "reconnects": 0,
+        "readings_total": 1,
+        "invalid_total": 0,
+        "last_reading": {
+          "sensor_id": "battery",
+          "sensor_type": "battery",
+          "timestamp": "2026-10-20T15:35:23.352695+00:00",
+          "value": {
+            "voltage": 8.266,
+            "current": 0.248
+          },
+          "units": {
+            "voltage": "V",
+            "current": "A"
+          },
+          "valid": true,
+          "simulated": true,
+          "error": null,
+          "metadata": {}
+        },
+        "last_valid_at": "2026-10-20T15:35:23.352695+00:00",
+        "calibration": {
+          "state": "not_applicable"
+        },
+        "safety_role": null
+      },
+      {
+        "id": "soc_temperature",
+        "type": "temperature",
+        "label": "SoC temperature (simulated)",
+        "driver": "simulated",
+        "enabled": true,
+        "simulated": true,
+        "physically_verified": false,
+        "required_for_arming": false,
+        "state": "connected",
+        "reading_health": "ok",
+        "available": true,
+        "error": null,
+        "rate_hz": 0.5,
+        "stale_after_s": 10.0,
+        "age_s": 0.203,
+        "reconnects": 0,
+        "readings_total": 1,
+        "invalid_total": 0,
+        "last_reading": {
+          "sensor_id": "soc_temperature",
+          "sensor_type": "temperature",
+          "timestamp": "2026-10-20T15:35:23.354734+00:00",
+          "value": {
+            "temperature": 48.33
+          },
+          "units": {
+            "temperature": "degC"
+          },
+          "valid": true,
+          "simulated": true,
+          "error": null,
+          "metadata": {}
+        },
+        "last_valid_at": "2026-10-20T15:35:23.354734+00:00",
+        "calibration": {
+          "state": "not_applicable"
+        },
+        "safety_role": null
+      }
+    ],
+    "faults": [],
+    "camera": {
+      "provider": "simulated",
+      "simulated": true,
+      "online": false,
+      "fps": 0.0,
+      "last_frame_at": null,
+      "last_frame_age_s": null,
+      "frames_total": 0,
+      "error": null
+    },
+    "vision": {
+      "enabled": false,
+      "backend": "onnx",
+      "model_path": "models/yolov8n.onnx",
+      "model_description": "YOLOv8n (COCO-pretrained unless replaced with custom weights)",
+      "weights_validated_for_task": false,
+      "ready": false,
+      "error": "disabled",
+      "classes": 0,
+      "frames_processed": 0,
+      "inference_ms": null,
+      "result_age_s": null,
+      "on_simulated_camera": true,
+      "latest": null
+    },
+    "detections": [],
+    "capabilities": [
+      {
+        "id": "manual_control",
+        "label": "Manual motor control",
+        "status": "simulated",
+        "summary": "Tank-steer manual driving with dead-man.",
+        "reasons": [
+          "rover is disarmed: arm before driving"
+        ],
+        "depends_on": [
+          "motor_driver"
+        ],
+        "usable": true
+      },
+      {
+        "id": "obstacle_sensing",
+        "label": "Obstacle sensing",
+        "status": "simulated",
+        "summary": "2/2 obstacle sensors healthy. Not a landmine detector.",
+        "reasons": [],
+        "depends_on": [
+          "front_ultrasonic",
+          "front_ir"
+        ],
+        "usable": true
+      },
+      {
+        "id": "grid_planning",
+        "label": "Grid route planning",
+        "status": "ready",
+        "summary": "Boustrophedon planning in a local grid. Needs no localization hardware.",
+        "reasons": [],
+        "depends_on": [],
+        "usable": true
+      },
+      {
+        "id": "grid_execution",
+        "label": "Grid mission execution",
+        "status": "simulated",
+        "summary": "Open-loop execution from timed commands.",
+        "reasons": [
+          "no local position source: execution is OPEN-LOOP (commanded motion, coverage not verified)"
+        ],
+        "depends_on": [
+          "manual_control",
+          "calibration"
+        ],
+        "usable": true
+      },
+      {
+        "id": "gps_planning",
+        "label": "GPS route planning",
+        "status": "ready",
+        "summary": "Polygon planning in a local ENU frame. Available without a receiver (planning only).",
+        "reasons": [],
+        "depends_on": [],
+        "usable": true
+      },
+      {
+        "id": "gps_navigation",
+        "label": "GPS-guided navigation",
+        "status": "not_installed",
+        "summary": "No GNSS receiver configured. GPS missions can be planned but not executed.",
+        "reasons": [],
+        "depends_on": [
+          "gps"
+        ],
+        "usable": false
+      },
+      {
+        "id": "encoder_odometry",
+        "label": "Wheel-encoder odometry",
+        "status": "not_installed",
+        "summary": "No wheel encoders configured (hardware not installed).",
+        "reasons": [],
+        "depends_on": [
+          "wheel_encoder"
+        ],
+        "usable": false
+      },
+      {
+        "id": "heading_estimation",
+        "label": "Heading estimation",
+        "status": "unavailable",
+        "summary": "No trustworthy heading source. Magnetometer heading is diagnostic only.",
+        "reasons": [
+          "magnetometer magnetometer: magnetometer not calibrated (hard/soft-iron); no tilt compensation (IMU orientation fusion not available) and level operation not asserted"
+        ],
+        "depends_on": [
+          "none",
+          "magnetometer"
+        ],
+        "usable": false
+      },
+      {
+        "id": "magnetometer",
+        "label": "Magnetometer measurements",
+        "status": "simulated",
+        "summary": "1/1 magnetometers OK (simulated).",
+        "reasons": [
+          "magnetometer: not calibrated"
+        ],
+        "depends_on": [
+          "magnetometer"
+        ],
+        "usable": true
+      },
+      {
+        "id": "imu",
+        "label": "IMU measurements",
+        "status": "not_installed",
+        "summary": "No IMUs configured (hardware not installed).",
+        "reasons": [],
+        "depends_on": [
+          "imu"
+        ],
+        "usable": false
+      },
+      {
+        "id": "camera_streaming",
+        "label": "Camera streaming",
+        "status": "unavailable",
+        "summary": "Camera offline: no frames",
+        "reasons": [],
+        "depends_on": [
+          "camera"
+        ],
+        "usable": false
+      },
+      {
+        "id": "object_detection",
+        "label": "Camera object detection (YOLOv8n)",
+        "status": "not_installed",
+        "summary": "Vision disabled in configuration.",
+        "reasons": [],
+        "depends_on": [],
+        "usable": false
+      },
+      {
+        "id": "detection_logging",
+        "label": "Metal-detector event logging",
+        "status": "simulated",
+        "summary": "1/1 metal detectors OK (simulated).",
+        "reasons": [
+          "no valid position source: events are logged without a position",
+          "simulated detector: events are flagged SIMULATED"
+        ],
+        "depends_on": [
+          "metal"
+        ],
+        "usable": true
+      },
+      {
+        "id": "battery_monitoring",
+        "label": "Battery monitoring",
+        "status": "simulated",
+        "summary": "1/1 battery monitors OK (simulated).",
+        "reasons": [],
+        "depends_on": [
+          "battery"
+        ],
+        "usable": true
+      },
+      {
+        "id": "temperature_monitoring",
+        "label": "Temperature monitoring",
+        "status": "simulated",
+        "summary": "1/1 temperature sensors OK (simulated).",
+        "reasons": [],
+        "depends_on": [
+          "soc_temperature"
+        ],
+        "usable": true
+      },
+      {
+        "id": "localization",
+        "label": "Physical localization",
+        "status": "not_installed",
+        "summary": "No GPS, encoders or other position source installed.",
+        "reasons": [],
+        "depends_on": [],
+        "usable": false
+      }
+    ],
+    "simulation": {
+      "speed_factor": 1.0,
+      "truth": {
+        "pose": {
+          "x": 0.35,
+          "y": 0.1,
+          "heading_deg": 0.0
+        },
+        "speed_mps": 0.0,
+        "yaw_rate_dps": 0.0,
+        "collided": false,
+        "sim_time_s": 0.22
+      },
+      "faults": [],
+      "available_faults": {
+        "ultrasonic_no_echo": "Ultrasonic sensors return no echo (invalid measurement)",
+        "ultrasonic_stale": "Ultrasonic sensors stop producing new measurements",
+        "ultrasonic_disconnect": "Ultrasonic sensors raise I/O errors (disconnected)",
+        "ir_fault": "IR sensors produce invalid readings",
+        "gps_loss": "Simulated GPS loses its fix",
+        "gps_degraded": "Simulated GPS reports poor accuracy (HDOP 6)",
+        "magnetometer_disconnect": "Magnetometer raises I/O errors",
+        "motor_driver_fault": "Simulated motor driver stops responding (outputs ignored)",
+        "camera_offline": "Simulated camera stops producing frames",
+        "control_link_drop": "Incoming manual-control messages are dropped (tests dead-man)",
+        "control_loop_stall": "Motion control loop stops updating the driver (tests driver watchdog)"
+      },
+      "obstacles": [],
+      "metal_targets": [
+        {
+          "x": 1.1,
+          "y": 2.2,
+          "strength": 1.2,
+          "radius_m": 0.25
+        },
+        {
+          "x": 2.6,
+          "y": 3.6,
+          "strength": 0.8,
+          "radius_m": 0.2
+        }
+      ],
+      "geo_origin": {
+        "lat": 12.9716,
+        "lon": 77.5946,
+        "alt": 900.0
+      }
+    }
+  },
+  "system": {
+    "version": "1.0.0",
+    "mode": "simulation",
+    "simulated": true,
+    "rover_name": "Survey Rover - Presentation Demo",
+    "started_at": "2026-10-20T15:35:23.064052+00:00",
+    "uptime_s": 0.5,
+    "config_fingerprint": "f7a02694fdad9819",
+    "hardware_errors": {},
+    "motor_driver": {
+      "driver": "simulated",
+      "simulated": true,
+      "initialized": true,
+      "healthy": true,
+      "error": null,
+      "outputs": {
+        "left": 0.0,
+        "right": 0.0
+      },
+      "watchdog_timeout_s": 0.5,
+      "watchdog_tripped": false,
+      "watchdog_trips": 0
+    },
+    "gpio_chip": null,
+    "auth_enabled": false,
+    "control_owner": null,
+    "ui": {
+      "map_tile_url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "map_tile_attribution": "&copy; OpenStreetMap contributors",
+      "map_max_zoom": 22,
+      "map_center_lat": 12.9716,
+      "map_center_lon": 77.5946
+    },
+    "manual": {
+      "deadman_timeout_s": 0.35,
+      "heartbeat_interval_s": 0.1,
+      "default_speed": 0.5,
+      "max_speed": 0.8
+    },
+    "calibration": {
+      "full_speed_mps": 0.45,
+      "effective_track_m": 0.37,
+      "calibrated": true,
+      "notes": "default model; the simulated chassis deliberately differs by speed_bias/turn_bias",
+      "full_pivot_dps": 139.4
+    },
+    "time": 1792510523.5639136
+  },
+  "events": [
+    {
+      "id": 1,
+      "ts": "2026-10-20T15:35:23.301439+00:00",
+      "level": "info",
+      "source": "system",
+      "code": "system.start",
+      "message": "Rover backend 1.0.0 started in SIMULATION mode; rover is DISARMED",
+      "mission_id": null,
+      "data": {}
+    },
+    {
+      "id": 2,
+      "ts": "2026-10-20T15:35:23.346697+00:00",
+      "level": "info",
+      "source": "sensor.front_ultrasonic",
+      "code": "sensor.connected",
+      "message": "Front ultrasonic (HC-SR04) connected (simulated)",
+      "mission_id": null,
+      "data": {}
+    },
+    {
+      "id": 3,
+      "ts": "2026-10-20T15:35:23.346697+00:00",
+      "level": "info",
+      "source": "sensor.front_ir",
+      "code": "sensor.connected",
+      "message": "Front IR connected (simulated)",
+      "mission_id": null,
+      "data": {}
+    },
+    {
+      "id": 4,
+      "ts": "2026-10-20T15:35:23.350724+00:00",
+      "level": "info",
+      "source": "sensor.metal",
+      "code": "sensor.connected",
+      "message": "Metal detector (simulated) connected (simulated)",
+      "mission_id": null,
+      "data": {}
+    },
+    {
+      "id": 5,
+      "ts": "2026-10-20T15:35:23.350724+00:00",
+      "level": "info",
+      "source": "sensor.magnetometer",
+      "code": "sensor.connected",
+      "message": "Magnetometer (simulated, uncalibrated) connected (simulated)",
+      "mission_id": null,
+      "data": {}
+    },
+    {
+      "id": 6,
+      "ts": "2026-10-20T15:35:23.350724+00:00",
+      "level": "info",
+      "source": "sensor.battery",
+      "code": "sensor.connected",
+      "message": "Battery (simulated) connected (simulated)",
+      "mission_id": null,
+      "data": {}
+    },
+    {
+      "id": 7,
+      "ts": "2026-10-20T15:35:23.354734+00:00",
+      "level": "info",
+      "source": "sensor.soc_temperature",
+      "code": "sensor.connected",
+      "message": "SoC temperature (simulated) connected (simulated)",
+      "mission_id": null,
+      "data": {}
+    },
+    {
+      "id": 8,
+      "ts": "2026-10-20T15:35:23.557911+00:00",
+      "level": "info",
+      "source": "mission",
+      "code": "mission.state",
+      "message": "Mission IDLE -> READY: loaded '5 x 5 m sample survey'",
+      "mission_id": "42b42878-7255-4dbd-a313-c46f2f013cd3",
+      "data": {
+        "from_state": "IDLE",
+        "to_state": "READY"
+      }
+    }
+  ],
+  "plan": {
+    "planner_version": "1.0.0",
+    "kind": "grid",
+    "frame": "grid_local",
+    "origin": null,
+    "anchor_gps": null,
+    "boundary": [
+      {
+        "x": 0.0,
+        "y": 0.0
+      },
+      {
+        "x": 5.0,
+        "y": 0.0
+      },
+      {
+        "x": 5.0,
+        "y": 5.0
+      },
+      {
+        "x": 0.0,
+        "y": 5.0
+      }
+    ],
+    "boundary_geo": null,
+    "inner_boundary": [
+      [
+        {
+          "x": 0.1,
+          "y": 0.1
+        },
+        {
+          "x": 0.1,
+          "y": 4.9
+        },
+        {
+          "x": 4.9,
+          "y": 4.9
+        },
+        {
+          "x": 4.9,
+          "y": 0.1
+        },
+        {
+          "x": 0.1,
+          "y": 0.1
+        }
+      ]
+    ],
+    "lane_heading_deg": 0.0,
+    "start_pose": {
+      "x": 0.35,
+      "y": 0.1,
+      "heading_deg": 0.0
+    },
+    "segments": [
+      {
+        "index": 0,
+        "kind": "lane",
+        "lane_index": 0,
+        "cell_index": 0,
+        "start": {
+          "x": 0.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 0.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 0.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 0.35,
+            "y": 0.1
+          },
+          {
+            "x": 0.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 1,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 0.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 0.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 0.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 2,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 0.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 0.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 0.35,
+            "y": 4.9
+          },
+          {
+            "x": 0.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.5
+      },
+      {
+        "index": 3,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 0.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 0.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 180.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 0.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 4,
+        "kind": "lane",
+        "lane_index": 1,
+        "cell_index": 0,
+        "start": {
+          "x": 0.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 0.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 180.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 0.85,
+            "y": 4.9
+          },
+          {
+            "x": 0.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 5,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 0.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 0.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 0.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 6,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 0.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 1.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 0.85,
+            "y": 0.1
+          },
+          {
+            "x": 1.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.5000000000000004
+      },
+      {
+        "index": 7,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 1.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 1.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 0.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 8,
+        "kind": "lane",
+        "lane_index": 2,
+        "cell_index": 0,
+        "start": {
+          "x": 1.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 1.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 0.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.35,
+            "y": 0.1
+          },
+          {
+            "x": 1.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 9,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 1.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 1.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 10,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 1.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 1.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.35,
+            "y": 4.9
+          },
+          {
+            "x": 1.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.5
+      },
+      {
+        "index": 11,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 1.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 1.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 180.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 12,
+        "kind": "lane",
+        "lane_index": 3,
+        "cell_index": 0,
+        "start": {
+          "x": 1.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 1.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 180.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.85,
+            "y": 4.9
+          },
+          {
+            "x": 1.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 13,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 1.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 1.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 14,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 1.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 2.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 1.85,
+            "y": 0.1
+          },
+          {
+            "x": 2.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.5
+      },
+      {
+        "index": 15,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 2.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 2.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 0.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 16,
+        "kind": "lane",
+        "lane_index": 4,
+        "cell_index": 0,
+        "start": {
+          "x": 2.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 2.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 0.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.35,
+            "y": 0.1
+          },
+          {
+            "x": 2.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 17,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 2.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 2.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 18,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 2.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 2.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.35,
+            "y": 4.9
+          },
+          {
+            "x": 2.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.5
+      },
+      {
+        "index": 19,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 2.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 2.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 180.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 20,
+        "kind": "lane",
+        "lane_index": 5,
+        "cell_index": 0,
+        "start": {
+          "x": 2.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 2.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 180.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.85,
+            "y": 4.9
+          },
+          {
+            "x": 2.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 21,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 2.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 2.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 22,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 2.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 3.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 2.85,
+            "y": 0.1
+          },
+          {
+            "x": 3.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.5
+      },
+      {
+        "index": 23,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 3.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 3.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 0.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 24,
+        "kind": "lane",
+        "lane_index": 6,
+        "cell_index": 0,
+        "start": {
+          "x": 3.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 3.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 0.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.35,
+            "y": 0.1
+          },
+          {
+            "x": 3.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 25,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 3.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 3.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 26,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 3.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 3.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.35,
+            "y": 4.9
+          },
+          {
+            "x": 3.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.5
+      },
+      {
+        "index": 27,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 3.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 3.85,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 180.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.85,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 28,
+        "kind": "lane",
+        "lane_index": 7,
+        "cell_index": 0,
+        "start": {
+          "x": 3.85,
+          "y": 4.9
+        },
+        "end": {
+          "x": 3.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 180.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.85,
+            "y": 4.9
+          },
+          {
+            "x": 3.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 29,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 3.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 3.85,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.85,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 30,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 3.85,
+          "y": 0.1
+        },
+        "end": {
+          "x": 4.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.5,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 3.85,
+            "y": 0.1
+          },
+          {
+            "x": 4.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 2.499999999999998
+      },
+      {
+        "index": 31,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 4.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 4.35,
+          "y": 0.1
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 0.0,
+        "length_m": 0.0,
+        "rotation_deg": -90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 4.35,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 32,
+        "kind": "lane",
+        "lane_index": 8,
+        "cell_index": 0,
+        "start": {
+          "x": 4.35,
+          "y": 0.1
+        },
+        "end": {
+          "x": 4.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 0.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 4.35,
+            "y": 0.1
+          },
+          {
+            "x": 4.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      },
+      {
+        "index": 33,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 4.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 4.35,
+          "y": 4.9
+        },
+        "heading_start_deg": 0.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 4.35,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 34,
+        "kind": "shift",
+        "lane_index": null,
+        "cell_index": 0,
+        "start": {
+          "x": 4.35,
+          "y": 4.9
+        },
+        "end": {
+          "x": 4.65,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 90.0,
+        "length_m": 0.3,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 4.35,
+            "y": 4.9
+          },
+          {
+            "x": 4.65,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.5000000000000036
+      },
+      {
+        "index": 35,
+        "kind": "pivot",
+        "lane_index": null,
+        "cell_index": null,
+        "start": {
+          "x": 4.65,
+          "y": 4.9
+        },
+        "end": {
+          "x": 4.65,
+          "y": 4.9
+        },
+        "heading_start_deg": 90.0,
+        "heading_end_deg": 180.0,
+        "length_m": 0.0,
+        "rotation_deg": 90.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 4.65,
+            "y": 4.9
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 1.4741305877052762
+      },
+      {
+        "index": 36,
+        "kind": "lane",
+        "lane_index": 9,
+        "cell_index": 0,
+        "start": {
+          "x": 4.65,
+          "y": 4.9
+        },
+        "end": {
+          "x": 4.65,
+          "y": 0.1
+        },
+        "heading_start_deg": 180.0,
+        "heading_end_deg": 180.0,
+        "length_m": 4.8,
+        "rotation_deg": 0.0,
+        "turn_radius_m": null,
+        "arc_center": null,
+        "points": [
+          {
+            "x": 4.65,
+            "y": 4.9
+          },
+          {
+            "x": 4.65,
+            "y": 0.1
+          }
+        ],
+        "geo_points": null,
+        "within_boundary": true,
+        "estimated_duration_s": 24.000000000000004
+      }
+    ],
+    "waypoints": [
+      {
+        "index": 0,
+        "kind": "start",
+        "x": 0.35,
+        "y": 0.1,
+        "heading_deg": 0.0,
+        "segment_index": 0,
+        "lane_index": null,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 1,
+        "kind": "lane_start",
+        "x": 0.35,
+        "y": 0.1,
+        "heading_deg": 0.0,
+        "segment_index": 0,
+        "lane_index": 0,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 2,
+        "kind": "lane_end",
+        "x": 0.35,
+        "y": 4.9,
+        "heading_deg": 0.0,
+        "segment_index": 0,
+        "lane_index": 0,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 3,
+        "kind": "lane_start",
+        "x": 0.85,
+        "y": 4.9,
+        "heading_deg": 180.0,
+        "segment_index": 4,
+        "lane_index": 1,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 4,
+        "kind": "lane_end",
+        "x": 0.85,
+        "y": 0.1,
+        "heading_deg": 180.0,
+        "segment_index": 4,
+        "lane_index": 1,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 5,
+        "kind": "lane_start",
+        "x": 1.35,
+        "y": 0.1,
+        "heading_deg": 0.0,
+        "segment_index": 8,
+        "lane_index": 2,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 6,
+        "kind": "lane_end",
+        "x": 1.35,
+        "y": 4.9,
+        "heading_deg": 0.0,
+        "segment_index": 8,
+        "lane_index": 2,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 7,
+        "kind": "lane_start",
+        "x": 1.85,
+        "y": 4.9,
+        "heading_deg": 180.0,
+        "segment_index": 12,
+        "lane_index": 3,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 8,
+        "kind": "lane_end",
+        "x": 1.85,
+        "y": 0.1,
+        "heading_deg": 180.0,
+        "segment_index": 12,
+        "lane_index": 3,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 9,
+        "kind": "lane_start",
+        "x": 2.35,
+        "y": 0.1,
+        "heading_deg": 0.0,
+        "segment_index": 16,
+        "lane_index": 4,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 10,
+        "kind": "lane_end",
+        "x": 2.35,
+        "y": 4.9,
+        "heading_deg": 0.0,
+        "segment_index": 16,
+        "lane_index": 4,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 11,
+        "kind": "lane_start",
+        "x": 2.85,
+        "y": 4.9,
+        "heading_deg": 180.0,
+        "segment_index": 20,
+        "lane_index": 5,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 12,
+        "kind": "lane_end",
+        "x": 2.85,
+        "y": 0.1,
+        "heading_deg": 180.0,
+        "segment_index": 20,
+        "lane_index": 5,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 13,
+        "kind": "lane_start",
+        "x": 3.35,
+        "y": 0.1,
+        "heading_deg": 0.0,
+        "segment_index": 24,
+        "lane_index": 6,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 14,
+        "kind": "lane_end",
+        "x": 3.35,
+        "y": 4.9,
+        "heading_deg": 0.0,
+        "segment_index": 24,
+        "lane_index": 6,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 15,
+        "kind": "lane_start",
+        "x": 3.85,
+        "y": 4.9,
+        "heading_deg": 180.0,
+        "segment_index": 28,
+        "lane_index": 7,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 16,
+        "kind": "lane_end",
+        "x": 3.85,
+        "y": 0.1,
+        "heading_deg": 180.0,
+        "segment_index": 28,
+        "lane_index": 7,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 17,
+        "kind": "lane_start",
+        "x": 4.35,
+        "y": 0.1,
+        "heading_deg": 0.0,
+        "segment_index": 32,
+        "lane_index": 8,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 18,
+        "kind": "lane_end",
+        "x": 4.35,
+        "y": 4.9,
+        "heading_deg": 0.0,
+        "segment_index": 32,
+        "lane_index": 8,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 19,
+        "kind": "lane_start",
+        "x": 4.65,
+        "y": 4.9,
+        "heading_deg": 180.0,
+        "segment_index": 36,
+        "lane_index": 9,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 20,
+        "kind": "lane_end",
+        "x": 4.65,
+        "y": 0.1,
+        "heading_deg": 180.0,
+        "segment_index": 36,
+        "lane_index": 9,
+        "lat": null,
+        "lon": null
+      },
+      {
+        "index": 21,
+        "kind": "end",
+        "x": 4.65,
+        "y": 0.1,
+        "heading_deg": 180.0,
+        "segment_index": 36,
+        "lane_index": null,
+        "lat": null,
+        "lon": null
+      }
+    ],
+    "summary": {
+      "lane_count": 10,
+      "cell_count": 1,
+      "segment_count": 37,
+      "total_length_m": 52.3,
+      "lane_length_m": 48.0,
+      "turn_length_m": 4.3,
+      "transit_length_m": 0.0,
+      "pivot_count": 18,
+      "total_rotation_deg": 1620.0,
+      "estimated_duration_s": 288.0,
+      "area_m2": 25.0,
+      "inner_area_m2": 23.04,
+      "covered_area_m2": 23.04,
+      "nominal_coverage_ratio": 0.9216,
+      "lane_spacing_m": 0.5,
+      "swath_width_m": 0.5,
+      "speed_mps": 0.2
+    },
+    "issues": [],
+    "valid": true,
+    "parameters": {
+      "anchor_gps": null,
+      "units": "m",
+      "length": 5.0,
+      "width": 5.0,
+      "lane_spacing": 0.5,
+      "swath_width": null,
+      "margin": 0.1,
+      "start_corner": "near_left",
+      "lane_orientation": "along_length",
+      "initial_heading_deg": null,
+      "turn_strategy": "pivot",
+      "turn_radius": null,
+      "speed_mps": 0.2,
+      "execution_mode": "simulation",
+      "resolved_m": {
+        "length": 5.0,
+        "width": 5.0,
+        "lane_spacing": 0.5,
+        "swath_width": 0.5,
+        "margin": 0.1,
+        "turn_radius": null,
+        "speed_mps": 0.2
+      }
+    },
+    "plan_hash": "c771360f1e802f677f7f",
+    "localization_note": "Simulation: execution and coverage are simulated. No physical localization is available: this route is a COMMANDED path executed open-loop from timed motor commands and the calibration model. Displayed progress is an estimate of commanded motion, not proof that the rover physically covered the area."
+  },
+  "record": {
+    "id": "42b42878-7255-4dbd-a313-c46f2f013cd3",
+    "name": "5 x 5 m sample survey",
+    "kind": "grid",
+    "operating_mode": "simulation",
+    "status": "planned",
+    "execution": null,
+    "params": {
+      "length": 5,
+      "width": 5,
+      "lane_spacing": 0.5,
+      "margin": 0.1,
+      "execution_mode": "simulation",
+      "speed_mps": 0.2
+    },
+    "plan_hash": "c771360f1e802f677f7f",
+    "summary": {
+      "lane_count": 10,
+      "cell_count": 1,
+      "segment_count": 37,
+      "total_length_m": 52.3,
+      "lane_length_m": 48.0,
+      "turn_length_m": 4.3,
+      "transit_length_m": 0.0,
+      "pivot_count": 18,
+      "total_rotation_deg": 1620.0,
+      "estimated_duration_s": 288.0,
+      "area_m2": 25.0,
+      "inner_area_m2": 23.04,
+      "covered_area_m2": 23.04,
+      "nominal_coverage_ratio": 0.9216,
+      "lane_spacing_m": 0.5,
+      "swath_width_m": 0.5,
+      "speed_mps": 0.2
+    },
+    "progress": null,
+    "created_at": "2026-10-20T15:35:23.548881+00:00",
+    "updated_at": "2026-10-20T15:35:23.548881+00:00",
+    "started_at": null,
+    "paused_at": null,
+    "resumed_at": null,
+    "completed_at": null,
+    "cancelled_at": null,
+    "ended_reason": null,
+    "review_required": false,
+    "reviewed_at": null,
+    "review_note": null,
+    "plan": {
+      "planner_version": "1.0.0",
+      "kind": "grid",
+      "frame": "grid_local",
+      "origin": null,
+      "anchor_gps": null,
+      "boundary": [
+        {
+          "x": 0.0,
+          "y": 0.0
+        },
+        {
+          "x": 5.0,
+          "y": 0.0
+        },
+        {
+          "x": 5.0,
+          "y": 5.0
+        },
+        {
+          "x": 0.0,
+          "y": 5.0
+        }
+      ],
+      "boundary_geo": null,
+      "inner_boundary": [
+        [
+          {
+            "x": 0.1,
+            "y": 0.1
+          },
+          {
+            "x": 0.1,
+            "y": 4.9
+          },
+          {
+            "x": 4.9,
+            "y": 4.9
+          },
+          {
+            "x": 4.9,
+            "y": 0.1
+          },
+          {
+            "x": 0.1,
+            "y": 0.1
+          }
+        ]
+      ],
+      "lane_heading_deg": 0.0,
+      "start_pose": {
+        "x": 0.35,
+        "y": 0.1,
+        "heading_deg": 0.0
+      },
+      "segments": [
+        {
+          "index": 0,
+          "kind": "lane",
+          "lane_index": 0,
+          "cell_index": 0,
+          "start": {
+            "x": 0.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 0.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 0.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 0.35,
+              "y": 0.1
+            },
+            {
+              "x": 0.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 1,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 0.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 0.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 0.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 2,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 0.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 0.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 0.35,
+              "y": 4.9
+            },
+            {
+              "x": 0.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.5
+        },
+        {
+          "index": 3,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 0.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 0.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 180.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 0.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 4,
+          "kind": "lane",
+          "lane_index": 1,
+          "cell_index": 0,
+          "start": {
+            "x": 0.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 0.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 180.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 0.85,
+              "y": 4.9
+            },
+            {
+              "x": 0.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 5,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 0.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 0.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 0.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 6,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 0.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 1.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 0.85,
+              "y": 0.1
+            },
+            {
+              "x": 1.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.5000000000000004
+        },
+        {
+          "index": 7,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 1.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 1.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 0.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 8,
+          "kind": "lane",
+          "lane_index": 2,
+          "cell_index": 0,
+          "start": {
+            "x": 1.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 1.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 0.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.35,
+              "y": 0.1
+            },
+            {
+              "x": 1.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 9,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 1.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 1.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 10,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 1.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 1.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.35,
+              "y": 4.9
+            },
+            {
+              "x": 1.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.5
+        },
+        {
+          "index": 11,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 1.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 1.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 180.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 12,
+          "kind": "lane",
+          "lane_index": 3,
+          "cell_index": 0,
+          "start": {
+            "x": 1.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 1.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 180.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.85,
+              "y": 4.9
+            },
+            {
+              "x": 1.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 13,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 1.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 1.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 14,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 1.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 2.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 1.85,
+              "y": 0.1
+            },
+            {
+              "x": 2.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.5
+        },
+        {
+          "index": 15,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 2.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 2.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 0.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 16,
+          "kind": "lane",
+          "lane_index": 4,
+          "cell_index": 0,
+          "start": {
+            "x": 2.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 2.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 0.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.35,
+              "y": 0.1
+            },
+            {
+              "x": 2.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 17,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 2.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 2.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 18,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 2.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 2.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.35,
+              "y": 4.9
+            },
+            {
+              "x": 2.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.5
+        },
+        {
+          "index": 19,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 2.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 2.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 180.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 20,
+          "kind": "lane",
+          "lane_index": 5,
+          "cell_index": 0,
+          "start": {
+            "x": 2.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 2.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 180.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.85,
+              "y": 4.9
+            },
+            {
+              "x": 2.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 21,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 2.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 2.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 22,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 2.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 3.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 2.85,
+              "y": 0.1
+            },
+            {
+              "x": 3.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.5
+        },
+        {
+          "index": 23,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 3.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 3.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 0.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 24,
+          "kind": "lane",
+          "lane_index": 6,
+          "cell_index": 0,
+          "start": {
+            "x": 3.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 3.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 0.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.35,
+              "y": 0.1
+            },
+            {
+              "x": 3.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 25,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 3.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 3.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 26,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 3.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 3.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.35,
+              "y": 4.9
+            },
+            {
+              "x": 3.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.5
+        },
+        {
+          "index": 27,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 3.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 3.85,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 180.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.85,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 28,
+          "kind": "lane",
+          "lane_index": 7,
+          "cell_index": 0,
+          "start": {
+            "x": 3.85,
+            "y": 4.9
+          },
+          "end": {
+            "x": 3.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 180.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.85,
+              "y": 4.9
+            },
+            {
+              "x": 3.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 29,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 3.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 3.85,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.85,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 30,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 3.85,
+            "y": 0.1
+          },
+          "end": {
+            "x": 4.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.5,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 3.85,
+              "y": 0.1
+            },
+            {
+              "x": 4.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 2.499999999999998
+        },
+        {
+          "index": 31,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 4.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 4.35,
+            "y": 0.1
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 0.0,
+          "length_m": 0.0,
+          "rotation_deg": -90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 4.35,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 32,
+          "kind": "lane",
+          "lane_index": 8,
+          "cell_index": 0,
+          "start": {
+            "x": 4.35,
+            "y": 0.1
+          },
+          "end": {
+            "x": 4.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 0.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 4.35,
+              "y": 0.1
+            },
+            {
+              "x": 4.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        },
+        {
+          "index": 33,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 4.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 4.35,
+            "y": 4.9
+          },
+          "heading_start_deg": 0.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 4.35,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 34,
+          "kind": "shift",
+          "lane_index": null,
+          "cell_index": 0,
+          "start": {
+            "x": 4.35,
+            "y": 4.9
+          },
+          "end": {
+            "x": 4.65,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 90.0,
+          "length_m": 0.3,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 4.35,
+              "y": 4.9
+            },
+            {
+              "x": 4.65,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.5000000000000036
+        },
+        {
+          "index": 35,
+          "kind": "pivot",
+          "lane_index": null,
+          "cell_index": null,
+          "start": {
+            "x": 4.65,
+            "y": 4.9
+          },
+          "end": {
+            "x": 4.65,
+            "y": 4.9
+          },
+          "heading_start_deg": 90.0,
+          "heading_end_deg": 180.0,
+          "length_m": 0.0,
+          "rotation_deg": 90.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 4.65,
+              "y": 4.9
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 1.4741305877052762
+        },
+        {
+          "index": 36,
+          "kind": "lane",
+          "lane_index": 9,
+          "cell_index": 0,
+          "start": {
+            "x": 4.65,
+            "y": 4.9
+          },
+          "end": {
+            "x": 4.65,
+            "y": 0.1
+          },
+          "heading_start_deg": 180.0,
+          "heading_end_deg": 180.0,
+          "length_m": 4.8,
+          "rotation_deg": 0.0,
+          "turn_radius_m": null,
+          "arc_center": null,
+          "points": [
+            {
+              "x": 4.65,
+              "y": 4.9
+            },
+            {
+              "x": 4.65,
+              "y": 0.1
+            }
+          ],
+          "geo_points": null,
+          "within_boundary": true,
+          "estimated_duration_s": 24.000000000000004
+        }
+      ],
+      "waypoints": [
+        {
+          "index": 0,
+          "kind": "start",
+          "x": 0.35,
+          "y": 0.1,
+          "heading_deg": 0.0,
+          "segment_index": 0,
+          "lane_index": null,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 1,
+          "kind": "lane_start",
+          "x": 0.35,
+          "y": 0.1,
+          "heading_deg": 0.0,
+          "segment_index": 0,
+          "lane_index": 0,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 2,
+          "kind": "lane_end",
+          "x": 0.35,
+          "y": 4.9,
+          "heading_deg": 0.0,
+          "segment_index": 0,
+          "lane_index": 0,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 3,
+          "kind": "lane_start",
+          "x": 0.85,
+          "y": 4.9,
+          "heading_deg": 180.0,
+          "segment_index": 4,
+          "lane_index": 1,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 4,
+          "kind": "lane_end",
+          "x": 0.85,
+          "y": 0.1,
+          "heading_deg": 180.0,
+          "segment_index": 4,
+          "lane_index": 1,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 5,
+          "kind": "lane_start",
+          "x": 1.35,
+          "y": 0.1,
+          "heading_deg": 0.0,
+          "segment_index": 8,
+          "lane_index": 2,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 6,
+          "kind": "lane_end",
+          "x": 1.35,
+          "y": 4.9,
+          "heading_deg": 0.0,
+          "segment_index": 8,
+          "lane_index": 2,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 7,
+          "kind": "lane_start",
+          "x": 1.85,
+          "y": 4.9,
+          "heading_deg": 180.0,
+          "segment_index": 12,
+          "lane_index": 3,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 8,
+          "kind": "lane_end",
+          "x": 1.85,
+          "y": 0.1,
+          "heading_deg": 180.0,
+          "segment_index": 12,
+          "lane_index": 3,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 9,
+          "kind": "lane_start",
+          "x": 2.35,
+          "y": 0.1,
+          "heading_deg": 0.0,
+          "segment_index": 16,
+          "lane_index": 4,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 10,
+          "kind": "lane_end",
+          "x": 2.35,
+          "y": 4.9,
+          "heading_deg": 0.0,
+          "segment_index": 16,
+          "lane_index": 4,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 11,
+          "kind": "lane_start",
+          "x": 2.85,
+          "y": 4.9,
+          "heading_deg": 180.0,
+          "segment_index": 20,
+          "lane_index": 5,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 12,
+          "kind": "lane_end",
+          "x": 2.85,
+          "y": 0.1,
+          "heading_deg": 180.0,
+          "segment_index": 20,
+          "lane_index": 5,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 13,
+          "kind": "lane_start",
+          "x": 3.35,
+          "y": 0.1,
+          "heading_deg": 0.0,
+          "segment_index": 24,
+          "lane_index": 6,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 14,
+          "kind": "lane_end",
+          "x": 3.35,
+          "y": 4.9,
+          "heading_deg": 0.0,
+          "segment_index": 24,
+          "lane_index": 6,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 15,
+          "kind": "lane_start",
+          "x": 3.85,
+          "y": 4.9,
+          "heading_deg": 180.0,
+          "segment_index": 28,
+          "lane_index": 7,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 16,
+          "kind": "lane_end",
+          "x": 3.85,
+          "y": 0.1,
+          "heading_deg": 180.0,
+          "segment_index": 28,
+          "lane_index": 7,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 17,
+          "kind": "lane_start",
+          "x": 4.35,
+          "y": 0.1,
+          "heading_deg": 0.0,
+          "segment_index": 32,
+          "lane_index": 8,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 18,
+          "kind": "lane_end",
+          "x": 4.35,
+          "y": 4.9,
+          "heading_deg": 0.0,
+          "segment_index": 32,
+          "lane_index": 8,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 19,
+          "kind": "lane_start",
+          "x": 4.65,
+          "y": 4.9,
+          "heading_deg": 180.0,
+          "segment_index": 36,
+          "lane_index": 9,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 20,
+          "kind": "lane_end",
+          "x": 4.65,
+          "y": 0.1,
+          "heading_deg": 180.0,
+          "segment_index": 36,
+          "lane_index": 9,
+          "lat": null,
+          "lon": null
+        },
+        {
+          "index": 21,
+          "kind": "end",
+          "x": 4.65,
+          "y": 0.1,
+          "heading_deg": 180.0,
+          "segment_index": 36,
+          "lane_index": null,
+          "lat": null,
+          "lon": null
+        }
+      ],
+      "summary": {
+        "lane_count": 10,
+        "cell_count": 1,
+        "segment_count": 37,
+        "total_length_m": 52.3,
+        "lane_length_m": 48.0,
+        "turn_length_m": 4.3,
+        "transit_length_m": 0.0,
+        "pivot_count": 18,
+        "total_rotation_deg": 1620.0,
+        "estimated_duration_s": 288.0,
+        "area_m2": 25.0,
+        "inner_area_m2": 23.04,
+        "covered_area_m2": 23.04,
+        "nominal_coverage_ratio": 0.9216,
+        "lane_spacing_m": 0.5,
+        "swath_width_m": 0.5,
+        "speed_mps": 0.2
+      },
+      "issues": [],
+      "valid": true,
+      "parameters": {
+        "anchor_gps": null,
+        "units": "m",
+        "length": 5.0,
+        "width": 5.0,
+        "lane_spacing": 0.5,
+        "swath_width": null,
+        "margin": 0.1,
+        "start_corner": "near_left",
+        "lane_orientation": "along_length",
+        "initial_heading_deg": null,
+        "turn_strategy": "pivot",
+        "turn_radius": null,
+        "speed_mps": 0.2,
+        "execution_mode": "simulation",
+        "resolved_m": {
+          "length": 5.0,
+          "width": 5.0,
+          "lane_spacing": 0.5,
+          "swath_width": 0.5,
+          "margin": 0.1,
+          "turn_radius": null,
+          "speed_mps": 0.2
+        }
+      },
+      "plan_hash": "c771360f1e802f677f7f",
+      "localization_note": "Simulation: execution and coverage are simulated. No physical localization is available: this route is a COMMANDED path executed open-loop from timed motor commands and the calibration model. Displayed progress is an estimate of commanded motion, not proof that the rover physically covered the area."
+    }
+  },
+  "config": {
+    "mode": "simulation",
+    "rover_name": "Survey Rover - Presentation Demo",
+    "server": {
+      "host": "0.0.0.0",
+      "port": 8000,
+      "cors_origins": [
+        "*"
+      ],
+      "frontend_dist": null,
+      "telemetry_rate_hz": 5.0
+    },
+    "auth": {
+      "enabled": false,
+      "token": null
+    },
+    "database": {
+      "path": "data/rover-sim.db",
+      "telemetry_sample_hz": 1.0,
+      "record_idle_telemetry": false,
+      "retention_days": 60
+    },
+    "logging": {
+      "level": "INFO",
+      "json_format": false
+    },
+    "gpio": {
+      "chip": "auto"
+    },
+    "motors": {
+      "driver": "simulated",
+      "left": {
+        "in_a": 17,
+        "in_b": 27,
+        "enable": 12,
+        "invert": false
+      },
+      "right": {
+        "in_a": 22,
+        "in_b": 23,
+        "enable": 13,
+        "invert": false
+      },
+      "pwm_frequency_hz": 1000,
+      "min_duty": 0.3,
+      "watchdog_timeout_s": 0.5
+    },
+    "motion": {
+      "control_rate_hz": 50.0,
+      "max_output": 0.85,
+      "max_accel_per_s": 2.5,
+      "max_decel_per_s": 5.0,
+      "reversal_dwell_s": 0.25,
+      "mission_command_timeout_s": 0.4,
+      "obstacle_slow_output": 0.35
+    },
+    "calibration": {
+      "full_speed_mps": 0.45,
+      "effective_track_m": 0.37,
+      "calibrated": true,
+      "notes": "default model; the simulated chassis deliberately differs by speed_bias/turn_bias"
+    },
+    "manual": {
+      "deadman_timeout_s": 0.35,
+      "heartbeat_interval_s": 0.1,
+      "max_continuous_s": 20.0,
+      "default_speed": 0.5,
+      "max_speed": 0.8,
+      "turn_ratio": 0.5,
+      "block_forward_on_obstacle": true
+    },
+    "safety": {
+      "obstacle_stop_distance_m": 0.3,
+      "obstacle_slow_distance_m": 0.6,
+      "obstacle_policy": "pause",
+      "block_forward_on_sensor_invalid": true,
+      "sensor_stale_s": 0.6,
+      "required_for_arming": [
+        "front_ultrasonic"
+      ],
+      "auto_disarm_idle_s": 300.0,
+      "estop_input": {
+        "enabled": false,
+        "pin": 26,
+        "active_low": true,
+        "pull": "up"
+      }
+    },
+    "sensors": [
+      {
+        "id": "front_ultrasonic",
+        "label": "Front ultrasonic (HC-SR04)",
+        "enabled": true,
+        "rate_hz": 12.0,
+        "stale_after_s": null,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "ultrasonic",
+        "driver": "simulated",
+        "trigger_pin": null,
+        "echo_pin": null,
+        "min_range_m": 0.02,
+        "max_range_m": 4.0,
+        "temperature_c": 20.0,
+        "beam_half_angle_deg": 15.0,
+        "mount": {
+          "x_m": 0.0,
+          "y_m": 0.12,
+          "yaw_deg": 0.0
+        },
+        "safety_role": "front"
+      },
+      {
+        "id": "front_ir",
+        "label": "Front IR",
+        "enabled": true,
+        "rate_hz": 30.0,
+        "stale_after_s": null,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "ir_obstacle",
+        "driver": "simulated",
+        "pin": null,
+        "active_low": true,
+        "pull": "up",
+        "debounce_ms": 30.0,
+        "nominal_range_m": 0.15,
+        "mount": {
+          "x_m": 0.0,
+          "y_m": 0.13,
+          "yaw_deg": 0.0
+        },
+        "safety_role": "front"
+      },
+      {
+        "id": "metal",
+        "label": "Metal detector (simulated)",
+        "enabled": true,
+        "rate_hz": 10.0,
+        "stale_after_s": null,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "metal_detector",
+        "driver": "simulated",
+        "pin": null,
+        "active_low": false,
+        "pull": "down",
+        "threshold": 0.5,
+        "release_threshold": 0.35,
+        "saturation": 1.0,
+        "min_event_interval_s": 2.0,
+        "calibration": {},
+        "mount": {
+          "x_m": 0.0,
+          "y_m": 0.18,
+          "yaw_deg": 0.0
+        }
+      },
+      {
+        "id": "magnetometer",
+        "label": "Magnetometer (simulated, uncalibrated)",
+        "enabled": true,
+        "rate_hz": 10.0,
+        "stale_after_s": null,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "magnetometer",
+        "driver": "simulated",
+        "i2c_bus": null,
+        "i2c_address": null,
+        "calibration": {
+          "calibrated": false,
+          "method": null,
+          "calibrated_at": null,
+          "hard_iron_ut": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "soft_iron": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "motor_interference_checked": false
+        },
+        "declination_deg": 0.0,
+        "mount_yaw_deg": 0.0,
+        "assume_level": false,
+        "expected_field_ut": [
+          20.0,
+          70.0
+        ]
+      },
+      {
+        "id": "imu",
+        "label": null,
+        "enabled": false,
+        "rate_hz": 50.0,
+        "stale_after_s": null,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "imu",
+        "driver": "simulated",
+        "i2c_bus": null,
+        "i2c_address": null,
+        "gyro_bias_dps": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": false
+      },
+      {
+        "id": "left_encoder",
+        "label": null,
+        "enabled": false,
+        "rate_hz": 50.0,
+        "stale_after_s": null,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "wheel_encoder",
+        "driver": "simulated",
+        "side": "left",
+        "counts_per_rev": 20.0,
+        "wheel_diameter_m": 0.065,
+        "pin_a": null,
+        "pin_b": null,
+        "calibrated": false
+      },
+      {
+        "id": "right_encoder",
+        "label": null,
+        "enabled": false,
+        "rate_hz": 50.0,
+        "stale_after_s": null,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "wheel_encoder",
+        "driver": "simulated",
+        "side": "right",
+        "counts_per_rev": 20.0,
+        "wheel_diameter_m": 0.065,
+        "pin_a": null,
+        "pin_b": null,
+        "calibrated": false
+      },
+      {
+        "id": "battery",
+        "label": "Battery (simulated)",
+        "enabled": true,
+        "rate_hz": 1.0,
+        "stale_after_s": 5.0,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "battery",
+        "driver": "simulated",
+        "cells": 2,
+        "min_cell_v": 3.4,
+        "max_cell_v": 4.2,
+        "warn_cell_v": 3.6
+      },
+      {
+        "id": "soc_temperature",
+        "label": "SoC temperature (simulated)",
+        "enabled": true,
+        "rate_hz": 0.5,
+        "stale_after_s": 10.0,
+        "read_timeout_s": 0.5,
+        "reconnect_interval_s": 3.0,
+        "max_consecutive_errors": 5,
+        "adapter": null,
+        "adapter_options": {},
+        "type": "temperature",
+        "driver": "simulated",
+        "thermal_zone": 0,
+        "warn_c": 75.0,
+        "critical_c": 85.0
+      }
+    ],
+    "localization": {
+      "provider": "none",
+      "gps": {
+        "port": "/dev/ttyAMA0",
+        "baudrate": 9600,
+        "min_fix_quality": 1,
+        "min_satellites": 5,
+        "max_hdop": 2.5,
+        "max_accuracy_m": 3.0,
+        "max_fix_age_s": 2.0,
+        "uere_m": 4.0,
+        "cog_min_speed_mps": 0.15,
+        "reconnect_interval_s": 3.0
+      },
+      "loss_pause_s": 1.0,
+      "loss_abort_s": 60.0,
+      "geo_max_extent_m": 2000.0,
+      "max_approach_distance_m": 30.0
+    },
+    "camera": {
+      "provider": "simulated",
+      "device_index": 0,
+      "width": 640,
+      "height": 480,
+      "stream_url": "http://192.168.4.50:81/stream",
+      "snapshot_url": "http://192.168.4.50/capture",
+      "connect_timeout_s": 4.0,
+      "read_timeout_s": 5.0,
+      "max_backoff_s": 15.0,
+      "max_frame_bytes": 800000,
+      "proxy_fps": 15.0
+    },
+    "vision": {
+      "enabled": false,
+      "backend": "onnx",
+      "model_path": "models/yolov8n.onnx",
+      "imgsz": 320,
+      "confidence": 0.35,
+      "iou": 0.45,
+      "max_rate_hz": 2.0,
+      "threads": 2,
+      "class_names": null,
+      "event_classes": [],
+      "on_detection_action": "log",
+      "snapshot_dir": "data/detection_snapshots",
+      "event_min_confidence": 0.6,
+      "event_min_interval_s": 3.0,
+      "weights_validated_for_task": false,
+      "model_description": "YOLOv8n (COCO-pretrained unless replaced with custom weights)"
+    },
+    "simulation": {
+      "speed_factor": 1.0,
+      "seed": 7,
+      "physics_rate_hz": 50.0,
+      "speed_bias": 0.03,
+      "turn_bias": 0.03,
+      "wheel_noise": 0.02,
+      "ultrasonic_noise_m": 0.008,
+      "gps_noise_m": 0.03,
+      "start_pose": {
+        "x": 0.35,
+        "y": 0.1,
+        "heading_deg": 0.0
+      },
+      "place_rover_at_start": true,
+      "geo_origin": {
+        "lat": 12.9716,
+        "lon": 77.5946,
+        "alt": 900.0
+      },
+      "obstacles": [],
+      "metal_targets": [
+        {
+          "x": 1.1,
+          "y": 2.2,
+          "strength": 1.2,
+          "radius_m": 0.25
+        },
+        {
+          "x": 2.6,
+          "y": 3.6,
+          "strength": 0.8,
+          "radius_m": 0.2
+        }
+      ]
+    },
+    "mission": {
+      "start_countdown_s": 3.0,
+      "settle_time_s": 0.3,
+      "pivot_output": 0.55,
+      "turn_output": 0.45,
+      "approach_output": 0.35,
+      "max_lanes": 400,
+      "max_segments": 5000,
+      "lookahead_m": 0.35,
+      "goal_tolerance_m": 0.12,
+      "heading_tolerance_deg": 4.0,
+      "progress_save_interval_s": 2.0
+    },
+    "ui": {
+      "map_tile_url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "map_tile_attribution": "&copy; OpenStreetMap contributors",
+      "map_max_zoom": 22,
+      "map_center_lat": 12.9716,
+      "map_center_lon": 77.5946
+    }
+  },
+  "preflight": [
+    {
+      "id": "demo",
+      "label": "Browser presentation",
+      "passed": true,
+      "required": true,
+      "message": "Sample data only; no hardware connected"
+    }
+  ]
+}

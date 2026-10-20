@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { wsUrl } from "../lib/api";
 import type { LogEvent, SystemInfo, Telemetry } from "../lib/types";
+import { demoEnabled, demoSnapshot, subscribeDemo } from "../demo/presentation";
 
 export type LinkState = "connecting" | "live" | "stale" | "offline" | "unauthorized";
 
@@ -26,6 +27,11 @@ export function TelemetryProvider({ children }: { children: ReactNode }) {
   const lastRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (demoEnabled) return subscribeDemo(() => {
+      const sample = demoSnapshot();
+      setTelemetry(sample.telemetry); setSystem(sample.system); setEvents(sample.events);
+      setLink("live"); setLastUpdate(Date.now());
+    });
     let ws: WebSocket | null = null;
     let closed = false;
     let retry = 500;

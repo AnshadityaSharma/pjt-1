@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { wsUrl } from "../lib/api";
 import type { Direction } from "../lib/drive";
+import { demoControlSocket, demoEnabled } from "../demo/presentation";
 
 export type ControlCommand =
   | { mode: "direction"; direction: Direction; speed: number }
@@ -53,7 +54,7 @@ export function useManualControl(clientId: string) {
       wsRef.current?.close();
       setLink("connecting");
       setLastError(null);
-      const ws = new WebSocket(wsUrl("/ws/control"));
+      const ws = demoEnabled ? demoControlSocket() : new WebSocket(wsUrl("/ws/control"));
       wsRef.current = ws;
       ws.onopen = () => {
         setLink("connected");

@@ -3,6 +3,7 @@ import { Button, Field, Notice, Panel } from "../components/ui";
 import { authToken, backendUrl, setConnection } from "../lib/api";
 import { useTelemetry } from "../state/telemetry";
 import CalibrationPanel from "../components/CalibrationPanel";
+import { demoEnabled } from "../demo/presentation";
 
 export default function Settings() {
   const { reconnect, link } = useTelemetry();
@@ -12,6 +13,7 @@ export default function Settings() {
 
   const test = async () => {
     setResult(null);
+    if (demoEnabled) { setResult({ ok: true, text: "Presentation mode uses local sample data. No backend connection is opened." }); return; }
     try {
       const base = url.trim().replace(/\/+$/, "");
       const res = await fetch(`${base}/api/health`);
@@ -23,6 +25,7 @@ export default function Settings() {
   };
 
   const save = () => {
+    if (demoEnabled) { setResult({ ok: true, text: "Presentation mode ignores backend addresses. Stop it and use npm run dev for a real backend connection." }); return; }
     setConnection(url, token || null);
     reconnect();
     setResult({ ok: true, text: "Saved. Reconnecting…" });
@@ -33,10 +36,10 @@ export default function Settings() {
       <Panel title="Backend connection">
         <div className="space-y-4">
           <Field label="Backend URL" hint="Leave empty when this page is served by the rover itself. Example: http://raspberrypi.local:8000">
-            <input className="input font-mono" value={url} placeholder="(same origin)" onChange={(e) => setUrl(e.target.value)} />
+            <input className="input font-mono" disabled={demoEnabled} value={url} placeholder="(same origin)" onChange={(e) => setUrl(e.target.value)} />
           </Field>
           <Field label="Access token" hint="Only needed when the backend has auth.enabled. Stored in this browser only.">
-            <input className="input font-mono" type="password" value={token} autoComplete="off" onChange={(e) => setToken(e.target.value)} />
+            <input className="input font-mono" disabled={demoEnabled} type="password" value={token} autoComplete="off" onChange={(e) => setToken(e.target.value)} />
           </Field>
           <div className="flex gap-2">
             <Button variant="primary" onClick={save}>Save &amp; reconnect</Button>

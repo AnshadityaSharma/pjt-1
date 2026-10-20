@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { httpUrl } from "../lib/api";
 import type { CameraStatus, VisionStatus } from "../lib/types";
 import { Chip, cx } from "./ui";
+import { demoEnabled } from "../demo/presentation";
 
 /**
  * Shows the backend's re-served MJPEG stream (the backend is the single client of
@@ -52,7 +53,7 @@ export function CameraView({ camera, vision, showDetections = true, className }:
       })}
       <div className="absolute left-2 top-2 flex flex-wrap gap-1">
         {camera?.simulated && <Chip tone="sim">simulated feed</Chip>}
-        {camera && camera.provider !== "none" && <Chip tone={online ? "ok" : "bad"}>{online ? `${camera.fps.toFixed(1)} fps` : "offline"}</Chip>}
+        {camera && camera.provider !== "none" && <Chip tone={online ? "ok" : "bad"}>{demoEnabled ? "presentation still" : online ? `${camera.fps.toFixed(1)} fps` : "offline"}</Chip>}
         {vision?.ready && <Chip tone="info">YOLO {vision.inference_ms ? `${vision.inference_ms.toFixed(0)} ms` : ""}</Chip>}
       </div>
     </div>
